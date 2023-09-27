@@ -1,0 +1,138 @@
+/* stylesheet for harview page */
+
+html, body {
+	margin: 1px;
+	font-size: 14px !important;
+	font-family: arial, sans-serif;
+	min-width: 750px; /* works when calculated width is less than this and not > 800! */
+}
+
+.srequest {
+	background-color: #E7FAFF;
+}
+
+.stracker {
+	background-color: #FFDDDD;
+}
+
+.cntracker {
+	background-color: #FF88FF;
+}
+
+table {
+	background-color: #BBEEFF;
+}
+
+table td {
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+table thead {
+	position: sticky;
+	top: 0;
+	z-index: 1;
+}
+
+/* Sortable table Up and Down Arrows
+.sortable th.descend:after {
+	content: "\25B2";
+}
+
+.sortable th.ascend:after {
+	content: "\25BC";
+}
+ */
+
+/* Tooltips for table cells */
+.CellWithTT:hover {
+	position:relative;
+}
+
+.CellTT {
+	display: none;
+	position: absolute;
+	z-index: 2;
+	/* border: 1px; */
+	background-color: #3388DD;
+	/* border-style: solid; */
+	border-radius: 6px;
+	/* border-width: 1px; */
+	/* border-color: blue; */
+	padding: 3px;
+	color: white;
+	top: 20px;
+	left: 20px;
+	min-width: 400px;
+}
+
+.CellWithTT:hover span.CellTT {
+	display: block;
+}
+
+
+/* The Modal (background) */
+
+/* Add Animation */
+@keyframes animate-top
+{
+	from {top:-300px; opacity:0}
+	to {top:0; opacity:1}
+}
+
+.animate {
+	animation-name: animate-top;
+	animation-duration: 0.4s;
+}
+
+.modal-bcgrnd {
+	position: fixed; /* Stay in place */
+	z-index: 3; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.25); /* Black w/ opacity */
+}
+
+.modal-content {
+	position: relative;
+	background-color: #E7FAFF;
+	margin: auto;
+	padding: 0;
+	border: 1px solid #888;
+	width: 80%;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.modal-header {
+	padding: 2px 6px;
+	background-color: #3388DD;
+	color: white;
+}
+
+.modal-body {
+	padding: 2px 6px;
+}
+
+.modal-footer {
+	padding: 2px 2px;
+	background-color: #3388DD;
+	color: white;
+}
+
+/* The Close Button */
+.close {
+	color: white;
+	float: right;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}

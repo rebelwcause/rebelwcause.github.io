@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Tims HAR Viewer</title>
+		<link rel="stylesheet" href="css.css">
+		<!-- <link rel="stylesheet" href="debug.css"> -->
+
+		<style>
+
+		.infobox {
+			background-color: #FFFFFF;
+			position: fixed;
+			top: 0;
+			padding-top: 6px;
+			width: 99%;
+		}
+
+		.info {
+			background-color: #E7F7FF;
+			border-spacing: 0 1px;
+			border: solid 1px rgba(0,0,0,0.25);
+			border-radius: 10px;
+			/* top, right, bottom, left */
+			padding: 0 10px 0 10px;
+		}
+
+		.content {
+			/* background-color: rgba(0,0,0,0.05); */
+			background-color: #E7FAFF;
+			padding: 2px;
+			/* border-spacing: 0 1px;
+			border: solid 1px rgba(0,0,0,0.25); */
+			border-radius: 5px;
+			width: 99%;
+		}
+
+		/* Style the tab */
+		.tab {
+			overflow: hidden;
+			/* padding-top: 10px; */
+		}
+
+		/* Style the buttons inside the tab */
+		.tab button {
+			float: right;
+			outline: none;
+			cursor: pointer;
+			padding: 2px 5px;
+			font-size: 18px !important;
+			border: 1px solid #ccc;
+			border-radius: 6px 6px 0 0;
+			color: #000000;
+			background-color: rgba(255,255,255,0.6);
+			margin-left: 4px;
+		}
+
+		/* Change background color of tab buttons on hover */
+		.tab button:hover {
+			background-color: #DDDDDD;
+		}
+
+		/* Tab button when active (selected) */
+		.tab button.active {
+			color: #FFFFFF;
+			background-color: #3388DD;
+		}
+
+		/* Style the tab content */
+		.tabcontent {
+			display: none;
+			border: 1px solid #ccc;
+		}
+
+		.tabcontentd {
+			display: none;
+			border: 1px solid #ccc;
+		}
+
+		/* Style the buttons inside the dialog tab */
+		.tabd button {
+			outline: none;
+			cursor: pointer;
+			padding: 2px 20px;
+			font-size: 18px !important;
+			border: 1px solid #ccc;
+			border-radius: 6px 6px 0 0;
+			color: #000000;
+			background-color: rgba(255,255,255,0.6);
+			margin-left: 4px;
+		}
+
+		/* Change background color of dialog tab buttons on hover */
+		.tabd button:hover {
+			background-color: #DDDDDD;
+		}
+
+		/* Dialog Tab button when active (selected) */
+		.tabd button.active {
+			color: #FFFFFF;
+			background-color: #3388DD;
+		}
+
+		</style>
+	</head>
+
+	<body>
+
+		<!-- Dialog with Background: Begin -->
+		<!-- Supported in early Firefox versions by enabling dom.dialog_element.enabled in about:config -->
+		<dialog class="modal-bcgrnd animate" id="modal">
+		  <div class="modal-content">
+			<div class="modal-header">
+				<div class="tabd">
+					<button class="tablinksd" id="tabd1" title="Basic">Basic</button>
+					<button class="tablinksd" id="tabd2" title="Request">Request</button>
+					<button class="tablinksd" id="tabd3" title="Response">Response</button>
+					<button class="tablinksd" id="tabd4" title="Raw JSON">Raw JSON</button>
+					<span class="close" id="close">X</span>
+				</div>
+			</div>
+			<div class="modal-body" id="modal_body">
+
+				<div id="idcontentd">
+
+					<div id="tab-d1" class="tabcontentd">
+						<table id="basictable">
+							<thead id="basicthead"></thead>
+							<tbody id="basictbody"></tbody>
+							<tfoot id="basictfoot"></tfoot>
+						</table>
+					</div>
+
+					<div id="tab-d2" class="tabcontentd">
+						<table id="requesttable">
+							<thead id="requestthead"></thead>
+							<tbody id="requesttbody"></tbody>
+							<tfoot id="requesttfoot"></tfoot>
+						</table>
+					</div>
+
+					<div id="tab-d3" class="tabcontentd">
+						<table id="responsetable">
+							<thead id="responsethead"></thead>
+							<tbody id="responsetbody"></tbody>
+							<tfoot id="responsetfoot"></tfoot>
+						</table>
+					</div>
+
+					<div id="tab-d4" class="tabcontentd">
+						<div id="raw">
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				&nbsp;
+			</div>
+		  </div>
+		</dialog>
+		<!-- Dialog with Background: End -->
+
+		<div id="idinfobox" class="infobox">
+
+			<div class="info">
+				<div class="tab">
+					<span style="float: left;">
+						<img style="padding: 2px 6px 0px 6px" src="i24.png" alt="Icon">
+					</span>
+					<span style="float: left; font-size: 24px;">Tims HAR Viewer</span>
+
+					<input class="browser-style" style="margin-left: 10px; margin-top: 10px;" type="checkbox" id="hide-blocked" title="Hide Blocked Sites/Domains">
+					<label for="hide-blocked" title="Hide Blocked Sites/Domains">HBS</label>
+
+					<input class="browser-style" style="margin-left: 10px; margin-top: 10px;" type="checkbox" id="graph-domains" title="Graph Domains">
+					<label for="graph-domains" title="Graph Domains">GD</label>
+
+					<input class="browser-style" style="margin-left: 10px; margin-top: 10px;" type="checkbox" id="hide-trackers" title="Hide known Trackers/Advertisers">
+					<label for="hide-trackers" title="Hide known Trackers/Advertisers">HTA</label>
+
+					<span style="float: right; padding: 2px 20px 0px 6px">
+						<input id="file-btn" type = "button" value = "Browse..." onclick ="javascript:document.getElementById('file-input').click();">
+						<input id="file-input" type="file" accept=".har" multiple style='display:none;'>
+						<!-- OLD NORMAL BUTTON <input type="file" id="file-input" accept=".har" multiple> -->
+					</span>
+
+					<button class="tablinks" id="cookies_btn" title="Cookies">Cookies</button>
+					<button class="tablinks" id="domains_btn" title="Domains">Domains</button>
+					<button class="tablinks" id="hosts_btn" title="Hosts">Hosts</button>
+					<button class="tablinks" id="requests_btn" title="Requests">Requests</button>
+					<button class="tablinks" id="sites_btn" title="Sites">Sites</button>
+					<button class="tablinks" id="graph_btn" title="Graph">Graph</button>
+
+				</div>
+			</div>
+		</div>
+
+		<div id="idcontent" class="content">
+
+			<div id="graph" class="tabcontent" style="background-color: #EEEEEE;">
+				<canvas id="_ctx" width="1800" height="850" style="background-color: #EEEEEE;"></canvas>
+				<!--
+				<button id="expandall-button">Expand all</button>
+				<button id="collapseall-button">Collapse all</button>
+				<select class="browser-style" id="debug-control">
+					<option value="window" selected>window</option>
+					<option value="document">document</option>
+					<option value="canvas">canvas</option>
+					<option value="graph">graph</option>
+				</select>
+				<br>
+				<div class="root"></div>
+				-->
+
+			</div>
+
+			<div id="sites" class="tabcontent">
+				<table id="sitestable" class="sortable" style="width: 100%;">
+
+					<thead id="sitesthead" style="background-color: #3388DD; color: #FFFFFF; font-weight: bold;">
+
+						<tr>
+							<th>Browser</th>
+							<th>Title</th>
+							<th>Time Stamp</th>
+							<th>Requests</th>
+							<th>Content Load (ms)</th>
+							<th>Load time (ms)</th>
+						</tr>
+					</thead>
+					<tbody id="sitestbody"></tbody>
+					<tfoot id="sitestfoot" style="background-color: #3388DD; color: #FFFFFF; font-weight: bold;">
+						<tr>
+							<td colspan=6>
+<p>NOTES:</p>
+<p>Cookie information is gathered ONLY from requests (request and response headers) and not from actual
+javascript so cookie counts are always an underestimate!!</p>
+<p>This tool only parses the har file (request/response headers) and has no access to information about web storage
+(local or session etc..).</p>
+<p>Tracking Pixels are considered to be images of size &lt; 200 bytes (includes images of 0 bytes) which
+include a query string and/or cookies.</p>
+<p>Cookie syncs are difficult to identify... more notes on this to come...</p>
+
+
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+
+			<div id="requests" class="tabcontent">
+				<table id="requeststable" class="sortable" style="width: 100%;">
+					<thead id="requeststhead" style="background-color: #3388DD; color: #FFFFFF; font-weight: bold;">
+						<tr>
+							<td colspan="10">
+								<input type="search" placeholder="Filter..." id="requests_sb" style="float: right;">
+							</td>
+						</tr>
+						<tr>
+							<th>URL</th>
+							<th>Host</th>
+							<th>Method</th>
+							<th>Status</th>
+							<th>Blocked</th>
+							<th>Cookies</th>
+							<th>Type</th>
+							<th style="min-width: 110px;">Response Size</th>
+							<th>Redirect</th>
+							<th>Comment</th>
+						</tr>
+					</thead>
+					<tbody id="requeststbody"></tbody>
+					<tfoot id="requeststfoot"></tfoot>
+				</table>
+			</div>
+
+			<div id="hosts" class="tabcontent">
+				<table id="hoststable" class="sortable" style="width: 100%;">
+					<thead id="hoststhead" style="background-color: #3388DD; color: #FFFFFF; font-weight: bold;">
+						<tr>
+							<td colspan="8">
+								<input type="search" placeholder="Filter..." id="hosts_sb" style="float: right;">
+							</td>
+						</tr>
+						<tr>
+							<th>Host</th>
+							<!-- <th>IP Address</th> -->
+							<th style="min-width: 100px;">Requests</th>
+							<th style="min-width: 100px;">Blocked</th>
+							<th style="min-width: 100px;">Tracking Pixels</th>
+							<th style="min-width: 100px;">Possible Cookie Syncs</th>
+							<th style="min-width: 100px;">Definite Cookie Syncs</th>
+							<th>Referrers</th>
+							<th>Comment</th>
+						</tr>
+					</thead>
+					<tbody id="hoststbody"></tbody>
+					<tfoot id="hoststfoot"></tfoot>
+				</table>
+			</div>
+
+			<div id="domains" class="tabcontent">
+				<table id="domainstable" class="sortable" style="width: 100%;">
+					<thead id="domainsthead" style="background-color: #3388DD; color: #FFFFFF; font-weight: bold;">
+						<tr>
+							<td colspan="9">
+								<input type="search" placeholder="Filter..." id="domains_sb" style="float: right;">
+							</td>
+						</tr>
+						<tr>
+							<th>Domain</th>
+							<th style="min-width: 100px;">Requests</th>
+							<th style="min-width: 100px;">Blocked</th>
+							<th style="min-width: 100px;">Tracking Pixels</th>
+							<th style="min-width: 100px;">TP Cookies</th>
+							<th style="min-width: 100px;">Possible Cookie Syncs</th>
+							<th style="min-width: 100px;">Definite Cookie Syncs</th>
+							<th>Referrers</th>
+							<th>Comment</th>
+						</tr>
+					</thead>
+					<tbody id="domainstbody"></tbody>
+					<tfoot id="domainstfoot"></tfoot>
+				</table>
+			</div>
+
+			<div id="cookies" class="tabcontent">
+				<table id="cookiestable" class="sortable" style="width: 100%;">
+					<thead id="cookiesthead" style="background-color: #3388DD; color: #FFFFFF; font-weight: bold;">
+						<tr>
+							<td colspan="6">
+								<input type="search" placeholder="Filter..." id="cookies_sb" style="float: right;">
+							</td>
+						</tr>
+						<tr>
+							<th>Domain</th>
+							<th>Cookie Name</th>
+							<th>Cookie Value</th>
+							<th style="min-width: 100px;">Count</th>
+							<th style="min-width: 100px;">Changed</th>
+							<th>Comment</th>
+						</tr>
+					</thead>
+					<tbody id="cookiestbody"></tbody>
+					<tfoot id="cookiestfoot" style="background-color: #3388DD; color: #FFFFFF; font-weight: bold;"></tfoot>
+				</table>
+			</div>
+
+		</div>
+
+		<!-- <script src="debug.js"></script> -->
+
+		<script src="../common/graph.js"></script>
+		<script src="custom.js"></script>
+
+		<script src="../nextdns/cname_trackers.js"></script>
+		<script src="../nextdns/services.js"></script>
+		<script src="../nextdns/trackers.js"></script>
+
+		<script src="../nextdns/ddg_trackers.js"></script>
+		<script src="../nextdns/trackers_ddg.js"></script>
+
+		<script src="../common/filtable.js"></script>
+		<script src="../common/sortable.js"></script>
+
+		<script src="../common/prog.js"></script>
+		<script src="har.js"></script>
+
+
+	</body>
+</html>
