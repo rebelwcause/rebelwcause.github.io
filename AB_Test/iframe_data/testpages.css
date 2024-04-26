@@ -1,0 +1,233 @@
+* {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0 auto 0 auto;
+  padding: 0;
+  font-size: 16px;
+  background-color: #f2f2f2;
+  width: 1000px;
+  max-width: 100%;
+}
+
+a { color: inherit; }
+
+#site-header {
+  margin: 0;
+  padding-left: 2em;
+  background-color: #c70d2c;
+}
+
+#site-header-abpkit {
+  margin: 0;
+  padding-left: 2em;
+  background-color: #0d20c7;
+}
+
+#site-header-dp {
+  margin: 0;
+  padding-left: 2em;
+  background-color: #111;
+}
+
+#site-header a,
+#site-header-abpkit a,
+#site-header-dp a {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+}
+
+#site-header a:hover { background-color: #970a21; }
+
+#site-header-abpkit a:hover { background-color: #062f55; }
+
+#site-header-dp a:hover { background-color: #292929; }
+
+#site-footer {
+  color: #ececec;
+  background-color: #292929;
+  font-size: 0.9em;
+  margin-top: 1em;
+  padding: 0.5em;
+}
+
+#site-update { text-align: center; }
+
+.site-panel {
+  background-color: white;
+  padding: 0.1em 1em 0.1em 1em;
+  margin-top: 0.5em;
+}
+
+.testcase-panel * {
+  margin: 0;
+  line-height: 1.4em;
+}
+
+.testcase-panel {
+  margin-top: 0.5em;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.testcase-panel > p,
+.testcase-panel > h2,
+.testcase-panel > h3 {
+  padding: 0.5em;
+  border-bottom: 1px solid #ccc;
+}
+
+.testcase-panel > h2 {
+  font-size: 1.2em;
+}
+
+.site-pagelist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-pagelist li {
+  background-color: #f3f3f3;
+  display: inline-block;
+  width: 100%;
+  margin-top: 0.25em;
+}
+
+.site-pagelist li:hover {
+  background-color: #eee;
+}
+
+.site-pagelist li a {
+  padding: 0.5em;
+  color: #222;
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+}
+
+.site-pagelist li a h3 {
+  font-weight: bold;
+  margin: 0;
+}
+
+.site-button {
+  padding: 0.5em;
+  background-color: #f3f3f3;
+  text-decoration: none;
+}
+
+.site-button:hover {
+  background-color: #eee;
+}
+
+.testcase-area {
+  display: flex;
+  min-height: 100px;
+  border-bottom: 1px solid #ccc;
+  border: 0;
+}
+
+.testcase-steps {
+  padding: 0.5em;
+  list-style: decimal;
+  list-style-position: inside;
+  border-bottom: 1px solid #ccc;
+}
+
+.testcase-filters {
+  padding: 0.5em;
+  list-style: decimal;
+  list-style-position: inside;
+}
+
+.testcase-filters pre {
+  padding: 0.1em;
+  overflow: hidden;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  font-family: monospace;
+}
+
+.testcase-waiting-content {
+  flex-grow: 1;
+  padding: 0.5em;
+  color: #000;
+  background-color: #f5f5f5;
+}
+
+.testcase-trigger {
+  flex-grow: 1;
+  padding: 0.5em;
+  color: #fff;
+  background-color: #ccc;
+}
+
+.testcase-trigger:hover {
+  background-color: #aaa;
+}
+
+.testcase-examplecontent,
+.testcase-expected-view,
+[data-expectedresult="pass"] {
+  flex-grow: 1;
+  padding: 0.5em;
+  color: #fff;
+  background-color: #0dc74b;
+}
+
+[data-expectedresult="fail"] {
+  flex-grow: 1;
+  padding: 0.5em;
+  color: #fff;
+  background-color: #c70d2c;
+}
+
+.testcase-trigger[data-expectedresult="pass"]:hover {
+  background-color: #0dc74b;
+}
+
+.testcase-trigger[data-expectedresult="fail"]:hover {
+  background-color: #c70d2c;
+}
+
+img[data-expectedresult="pass"],
+img.testcase-expected-view,
+audio.testcase-expected-view,
+video.testcase-expected-view,
+iframe.testcase-expected-view {
+  flex-grow: 0;
+  padding: 0;
+  background-color: transparent;
+}
+
+img[data-expectedresult="fail"] {
+  flex-grow: 0;
+  padding: 0;
+}
+
+.expected-view [data-expectedresult="pass"],
+.expected-view [data-expectedresult="fail"],
+.expected-view .testcase-trigger,
+.expected-view .testcase-waiting-content,
+.expected-view .testcase-nostyle,
+.testcase-expected-view {
+  display: none;
+}
+
+.expected-view .testcase-expected-view {
+  display: block;
+}
+
+img#img-eh {
+  flex-grow: 1;
+}
