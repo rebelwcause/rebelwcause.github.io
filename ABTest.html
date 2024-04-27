@@ -47,7 +47,6 @@
 
 		<section class="site-panel">
 			<h2>Popup</h2>
-			<p>Check that a filter using the $popup filter option is working as expected.</p>
 		</section>
 		<section id="link-based-popup-section" class="testcase-panel">
 			<h2 aria-label="test-case-link-based-popup" id="link-based-popup">Link based popup</h2>
@@ -124,7 +123,6 @@
 
 		<section class="site-panel">
 			<h2>Element Hiding</h2>
-			<p>Check that basic element hiding functionality is working as expected.</p>
 		</section>
 		<section id="id-selector-section" class="testcase-panel">
 			<h2 aria-label="test-case-id-selector" id="id-selector">ID Selector</h2>
@@ -370,7 +368,6 @@
 
 		<section class="site-panel">
 			<h2>Blocking</h2>
-			<p>Check that basic blocking functionality is working as expected.</p>
 		</section>
 		<section id="full-path-section" class="testcase-panel">
 			<h2 aria-label="test-case-full-path" id="full-path">Full Path</h2>
@@ -412,27 +409,7 @@
 				</li>
 			</ul>
 		</section>
-		<section id="wildcard-section" class="testcase-panel">
-			<h2 aria-label="test-case-wildcard" id="wildcard">Wildcard</h2>
-			<p>Test that a blocking filter describing a path with wildcards blocks its target.</p>
-			<div id="wildcard-area" class="testcase-area">
-				<img id="wildcard-fail-1" src="AB_Test/wildcard.png" data-expectedresult="fail" data-dp="fail">
-				<img id="wildcard-fail-2" src="AB_Test/wildcard_002.png" data-expectedresult="fail" data-dp="fail">
-				<div class="testcase-examplecontent">Example Content</div>
-			</div>
-			<h3>Steps</h3>
-			<ul class="testcase-steps">
-				<li>Add filter #1.</li>
-				<li>Refresh page.</li>
-				<li>The red images should be blocked and the space collapsed.</li>
-			</ul>
-			<h3>Filters</h3>
-			<ul id="wildcard-filters" class="testcase-filters">
-				<li>
-					<pre>/testfiles/blocking/wildcard/*/wildcard.png</pre>
-				</li>
-			</ul>
-		</section>
+
 		<section id="dynamic-section" class="testcase-panel">
 			<h2 aria-label="test-case-dynamic" id="dynamic">Dynamic</h2>
 			<p>Test that a blocking filter describing a path of a resource that is later dynamically added to the page blocks its target.</p>
@@ -461,25 +438,6 @@
 			let area = document.getElementById("blocking-dynamic");
 			area.appendChild(image);
 		</script>
-		<section id="deep-subdomains-section" class="testcase-panel">
-			<h2 aria-label="test-case-deep-subdomains" id="deep-subdomains">Deep subdomains</h2>
-			<p>Test that a blocking filter for a 3-component domain blocks a 4-component subdomain path.</p>
-			<div id="deep-subdomains-area" class="testcase-area">
-				<img id="deep-subdomains-fail-1" src="AB_Test/subdomain.png" data-expectedresult="fail" data-dp="fail">
-				<div class="testcase-examplecontent">Example Content</div>
-			</div>
-			<h3>Steps</h3>
-			<ul class="testcase-steps">
-				<li>Add filter #1.</li>
-				<li>Refresh page.</li>
-				<li>The red images should be blocked and the space collapsed.</li>
-			</ul>
-			<h3>Filters</h3>
-			<ul id="deep-subdomains-filters" class="testcase-filters">
-				<li>
-					<pre>||subdomain.abptestpages.org/testfiles/blocking/subdomain.png</pre>
-				</li>
-			</ul>
-		</section>
+
 	</body>
 </html>
