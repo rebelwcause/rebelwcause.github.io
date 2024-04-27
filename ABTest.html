@@ -493,6 +493,45 @@
 			</ul>
 		</section>
 
+		<pre>
+		Filters
+		========
+		URL Pattern Rules
+			/AB_Test/generic.png
+			rebelwcause.github.io/AB_Test/specific.png
+			rebelwcause.github.io/AB_Test/full-path.png
+			/AB_Test/partial-
+			rebelwcause.github.io/AB_Test/link.html
+			rebelwcause.github.io/AB_Test/script-tab.html
+			rebelwcause.github.io/AB_Test/script-window.html
+			/AB_Test/dynamic.png
+
+		CSS All Site Filters
+			img[src="AB_Test/generic.png"]
+			img[src="AB_Test/partial-path.png"]
+			img[src="AB_Test/dynamic.png"]
+
+		CSS General Filters
+			custom-ttag1
+
+		CSS Site Filters
+			rebelwcause.github.io##img[src="AB_Test/specific.png"]
+			rebelwcause.github.io##img[src="AB_Test/full-path.png"]
+			rebelwcause.github.io##custom-ttag2
+			rebelwcause.github.io###eh-id
+			rebelwcause.github.io##div[id='{{eh-id}}']
+			rebelwcause.github.io##.eh-class
+			rebelwcause.github.io##.testcase-area > .eh-descendant
+			rebelwcause.github.io##.testcase-examplecontent + .eh-sibling
+			rebelwcause.github.io##div[height="100"][width="100"]
+			rebelwcause.github.io##div[href="http://testcase-attribute.com/"]
+			rebelwcause.github.io##div[style="width: 200px;"]
+			rebelwcause.github.io##div[href^="http://testcase-startswith.com/"]
+			rebelwcause.github.io##div[style^="width: 201px;"]
+			rebelwcause.github.io##div[style$="width: 202px;"]
+			rebelwcause.github.io##div[style*="width: 203px;"]
+			rebelwcause.github.io##.testAd
+		</pre>
 
 	</body>
 </html>
