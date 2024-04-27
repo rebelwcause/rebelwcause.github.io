@@ -1,39 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<!-- https://rebelwcause.github.io/ABTest.html -->
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=windows-1252">
-		<title>Blocking - AB Test Pages</title>
+		<title>Blocking - AB Test Page</title>
 		<link rel="stylesheet" href="AB_Test/testpages.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="AB_Test/utils.js"></script>
 	</head>
 	<body>
 		<header id="site-header">
-				<a href="https://rebelwcause.github.io/ABTest.html">
-				<h1>AB Test Pages</h1>
+			<a href="https://rebelwcause.github.io/ABTest.html">
+				<h1>AB Test Page</h1>
 			</a>
 		</header>
 
 		<section class="site-panel">
 			<h2>General Block</h2>
 		</section>
-		<section id="basic-usage-section" class="testcase-panel">
-			<h2 aria-label="test-case-basic-usage" id="basic-usage">Basic usage</h2>
-			<p>Test that a basic block filter.</p>
-			<div id="basic-usage-area" class="testcase-area">
-				<img id="basic-usage-fail-1" src="AB_Test/specific.png" alt="BLOCKED!" data-expectedresult="fail">
-				<img id="basic-usage-pass-1" src="AB_Test/generic.png" alt="BLOCKED!" data-expectedresult="pass">
+		<section class="testcase-panel">
+			<h2>Basic usage</h2>
+			<p>Test a basic block filter.</p>
+			<div class="testcase-area">
+				<img src="AB_Test/specific.png" alt="BLOCKED!">
 				<div class="testcase-examplecontent">Example Content</div>
+				<img src="AB_Test/generic.png" alt="BLOCKED!">
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
 				<li>Add filter #1 and filter #2.</li>
 				<li>Refresh page.</li>
-				<li>Both the red image and the green element containing the white square should be blocked.</li>
+				<li>Both red images should be blocked.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="basic-usage-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>/AB_Test/generic.png</pre>
 				</li>
@@ -47,10 +46,10 @@
 		<section class="site-panel">
 			<h2>Popup</h2>
 		</section>
-		<section id="link-based-popup-section" class="testcase-panel">
-			<h2 aria-label="test-case-link-based-popup" id="link-based-popup">Link based popup</h2>
-			<p>Test that a filter using the $popup filter option works on a link based popup.</p>
-			<div id="link-based-popup-area" class="testcase-area">
+		<section class="testcase-panel">
+			<h2>Link based popup</h2>
+			<p>Test that a filter works on a link based popup.</p>
+			<div class="testcase-area">
 				<a href="AB_Test/link.html" target="_blank" class="testcase-trigger">Trigger link based popup</a>
 			</div>
 			<h3>Steps</h3>
@@ -58,19 +57,19 @@
 				<li>Add filter #1.</li>
 				<li>Refresh page.</li>
 				<li>Click the link above.</li>
-				<li>The popup opened should be closed.</li>
+				<li>The popup opened should be blocked.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="link-based-popup-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io/AB_Test/link.html</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="script-based-popup-tab-section" class="testcase-panel">
-			<h2 aria-label="test-case-script-based-popup-tab" id="script-based-popup-tab">Script based popup (tab)</h2>
-			<p>Test that a filter using the $popup filter option works on a script based popup.</p>
-			<div id="script-based-popup-tab-area" class="testcase-area">
+		<section class="testcase-panel">
+			<h2>Script based popup (tab)</h2>
+			<p>Test that a filter works on a script based popup.</p>
+			<div class="testcase-area">
 				<a href="#script-based-popup-tab" class="testcase-trigger" onclick="scriptPopupTab();">Trigger script based popup (tab)</a>
 			</div>
 			<h3>Steps</h3>
@@ -78,19 +77,19 @@
 				<li>Add filter #1.</li>
 				<li>Refresh page.</li>
 				<li>Click the link above.</li>
-				<li>The popup/tab opened should be closed.</li>
+				<li>The popup/tab opened should be blocked.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="script-based-popup-tab-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io/AB_Test/script-tab.html</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="script-based-popup-window-section" class="testcase-panel">
-			<h2 aria-label="test-case-script-based-popup-window" id="script-based-popup-window">Script based popup (window)</h2>
-			<p>Test that a filter using the $popup filter option works on a script based popup.</p>
-			<div id="script-based-popup-window-area" class="testcase-area">
+		<section class="testcase-panel">
+			<h2>Script based popup (window)</h2>
+			<p>Test that a filter works on a script based popup.</p>
+			<div class="testcase-area">
 				<a href="#script-based-popup-window" class="testcase-trigger" onclick="scriptPopupWindow();">Trigger script based popup (window)</a>
 			</div>
 			<h3>Steps</h3>
@@ -98,10 +97,10 @@
 				<li>Add filter #1.</li>
 				<li>Refresh page.</li>
 				<li>Click the link above.</li>
-				<li>The popup/window opened should be closed.</li>
+				<li>The popup/window opened should be blocked.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="script-based-popup-window-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io/AB_Test/script-window.html</pre>
 				</li>
@@ -123,12 +122,12 @@
 		<section class="site-panel">
 			<h2>Element Hiding</h2>
 		</section>
-		<section id="id-selector-section" class="testcase-panel">
-			<h2 aria-label="test-case-id-selector" id="id-selector">ID Selector</h2>
+		<section class="testcase-panel">
+			<h2>ID Selector</h2>
 			<p>Test that an element hiding filter using an ID selector hides its target.</p>
-			<div id="id-selector-area" class="testcase-area">
-				<div id="eh-id" data-expectedresult="fail" aria-label="id-selector-fail">Target</div>
-				<div class="testcase-examplecontent" aria-label="id-selector-example">Example Content</div>
+			<div class="testcase-area">
+				<div id="eh-id" data-expectedresult="fail">Target</div>
+				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -137,18 +136,18 @@
 				<li>The red element should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="id-selector-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io###eh-id</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="id-selector-with-double-curly-braces-section" class="testcase-panel">
-			<h2 aria-label="test-case-id-selector-with-double-curly-braces" id="id-selector-with-double-curly-braces">ID Selector with double curly braces</h2>
+		<section class="testcase-panel">
+			<h2>ID Selector with double curly braces</h2>
 			<p>Test that an element hiding filter using an ID selector with two curly braces hides its target.</p>
-			<div id="id-selector-with-double-curly-braces-area" class="testcase-area">
-				<div id="{{eh-id}}" data-expectedresult="fail" aria-label="id-selector-with-double-curly-braces-fail">Target</div>
-				<div class="testcase-examplecontent" aria-label="id-selector-with-double-curly-braces-example">Example Content</div>
+			<div class="testcase-area">
+				<div id="{{eh-id}}" data-expectedresult="fail">Target</div>
+				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -157,18 +156,18 @@
 				<li>The red element should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="id-selector-with-double-curly-braces-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io##div[id='{{eh-id}}']</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="class-selector-section" class="testcase-panel">
-			<h2 aria-label="test-case-class-selector" id="class-selector">Class Selector</h2>
+		<section class="testcase-panel">
+			<h2>Class Selector</h2>
 			<p>Test that an element hiding filter using a class selector hides its target.</p>
-			<div id="class-selector-area" class="testcase-area">
-				<div id="class-selector-fail-1" class="eh-class" data-expectedresult="fail" aria-label="class-selector-fail">Target</div>
-				<div class="testcase-examplecontent" aria-label="class-selector-example">Example Content</div>
+			<div class="testcase-area">
+				<div class="eh-class" data-expectedresult="fail">Target</div>
+				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -177,18 +176,18 @@
 				<li>The red element should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="class-selector-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io##.eh-class</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="descendant-selector-section" class="testcase-panel">
-			<h2 aria-label="test-case-descendant-selector" id="descendant-selector">Descendant Selector</h2>
+		<section class="testcase-panel">
+			<h2>Descendant Selector</h2>
 			<p>Test that an element hiding filter using a descendant selector hides its target.</p>
-			<div id="descendant-selector-area" class="testcase-area">
-				<div id="descendant-selector-fail-1" class="eh-descendant" data-expectedresult="fail" aria-label="descendant-selector-fail">Target</div>
-				<div class="testcase-examplecontent" aria-label="descendant-selector-example">Example Content</div>
+			<div class="testcase-area">
+				<div class="eh-descendant" data-expectedresult="fail">Target</div>
+				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -197,18 +196,18 @@
 				<li>The red element should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="descendant-selector-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io##.testcase-area &gt; .eh-descendant</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="sibling-selector-section" class="testcase-panel">
-			<h2 aria-label="test-case-sibling-selector" id="sibling-selector">Sibling Selector</h2>
+		<section class="testcase-panel">
+			<h2>Sibling Selector</h2>
 			<p>Test that an element hiding filter using a sibling selector hides its target.</p>
-			<div id="sibling-selector-area" class="testcase-area">
-				<div class="testcase-examplecontent" aria-label="sibling-selector-example">Example Content</div>
-				<div id="sibling-selector-fail-1" class="eh-sibling" data-expectedresult="fail" aria-label="sibling-selector-fail">Target</div>
+			<div class="testcase-area">
+				<div class="testcase-examplecontent">Example Content</div>
+				<div class="eh-sibling" data-expectedresult="fail">Target</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -217,18 +216,18 @@
 				<li>The red element should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="sibling-selector-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io##.testcase-examplecontent + .eh-sibling</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="attribute-selector-1-section" class="testcase-panel">
-			<h2 aria-label="test-case-attribute-selector-1" id="attribute-selector-1">Attribute Selector 1</h2>
+		<section class="testcase-panel">
+			<h2>Attribute Selector 1</h2>
 			<p>Test that an element hiding filter using an attribute selector hides its target.</p>
-			<div id="attribute-selector-1-area" class="testcase-area">
-				<div id="attribute-selector-1-fail-1" width="100" height="100" class="eh-sibling" data-expectedresult="fail" aria-label="attribute-selector-1-fail">Target</div>
-				<div class="testcase-examplecontent" aria-label="attribute-selector-1-example">Example Content</div>
+			<div class="testcase-area">
+				<div width="100" height="100" class="eh-sibling" data-expectedresult="fail">Target</div>
+				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -237,18 +236,18 @@
 				<li>The red element should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="attribute-selector-1-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io##div[height="100"][width="100"]</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="attribute-selector-2-section" class="testcase-panel">
-			<h2 aria-label="test-case-attribute-selector-2" id="attribute-selector-2">Attribute Selector 2</h2>
+		<section class="testcase-panel">
+			<h2>Attribute Selector 2</h2>
 			<p>Test that an element hiding filter using an attribute selector hides its target.</p>
-			<div id="attribute-selector-2-area" class="testcase-area">
-				<div id="attribute-selector-2-fail-1" href="http://testcase-attribute.com/" class="eh-sibling" data-expectedresult="fail" aria-label="attribute-selector-2-fail">Target</div>
-				<div class="testcase-examplecontent" aria-label="attribute-selector-2-example">Example Content</div>
+			<div class="testcase-area">
+				<div href="http://testcase-attribute.com/" class="eh-sibling" data-expectedresult="fail">Target</div>
+				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -257,18 +256,18 @@
 				<li>The red element should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="attribute-selector-2-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io##div[href="http://testcase-attribute.com/"]</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="attribute-selector-3-section" class="testcase-panel">
-			<h2 aria-label="test-case-attribute-selector-3" id="attribute-selector-3">Attribute Selector 3</h2>
+		<section class="testcase-panel">
+			<h2>Attribute Selector 3</h2>
 			<p>Test that an element hiding filter using an attribute selector hides its target.</p>
-			<div id="attribute-selector-3-area" class="testcase-area">
-				<div id="attribute-selector-3-fail-1" style="width: 200px;" class="eh-sibling" data-expectedresult="fail" aria-label="attribute-selector-3-fail">Target</div>
-				<div class="testcase-examplecontent" aria-label="attribute-selector-3-example">Example Content</div>
+			<div class="testcase-area">
+				<div style="width: 200px;" class="eh-sibling" data-expectedresult="fail">Target</div>
+				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -277,18 +276,18 @@
 				<li>The red element should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="attribute-selector-3-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io##div[style="width: 200px;"]</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="starts-with-selector-1-section" class="testcase-panel">
-			<h2 aria-label="test-case-starts-with-selector-1" id="starts-with-selector-1">Starts with Selector 1</h2>
+		<section class="testcase-panel">
+			<h2>Starts with Selector 1</h2>
 			<p>Test that an element hiding filter using a starts with selector hides its target.</p>
-			<div id="starts-with-selector-1-area" class="testcase-area">
-				<div id="starts-with-selector-1-fail-1" href="http://testcase-startswith.com/test" class="eh-sibling" data-expectedresult="fail" aria-label="starts-with-selector-1-fail">Target</div>
-				<div class="testcase-examplecontent" aria-label="starts-with-selector-1-example">Example Content</div>
+			<div class="testcase-area">
+				<div href="http://testcase-startswith.com/test" class="eh-sibling" data-expectedresult="fail">Target</div>
+				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -297,18 +296,18 @@
 				<li>The red element should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="starts-with-selector-1-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io##div[href^="http://testcase-startswith.com/"]</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="starts-with-selector-2-section" class="testcase-panel">
-			<h2 aria-label="test-case-starts-with-selector-2" id="starts-with-selector-2">Starts with Selector 2</h2>
+		<section class="testcase-panel">
+			<h2>Starts with Selector 2</h2>
 			<p>Test that an element hiding filter using a starts with selector hides its target.</p>
-			<div id="starts-with-selector-2-area" class="testcase-area">
-				<div id="starts-with-selector-2-fail-1" style="width: 201px; color: white;" class="eh-sibling" data-expectedresult="fail" aria-label="starts-with-selector-2-fail">Target</div>
-				<div class="testcase-examplecontent" aria-label="starts-with-selector-2-example">Example Content</div>
+			<div class="testcase-area">
+				<div style="width: 201px; color: white;" class="eh-sibling" data-expectedresult="fail">Target</div>
+				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -317,18 +316,18 @@
 				<li>The red element should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="starts-with-selector-2-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io##div[style^="width: 201px;"]</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="ends-with-selector-1-section" class="testcase-panel">
-			<h2 aria-label="test-case-ends-with-selector-1" id="ends-with-selector-1">Ends with Selector 1</h2>
+		<section class="testcase-panel">
+			<h2>Ends with Selector 1</h2>
 			<p>Test that an element hiding filter using a ends with selector hides its target.</p>
-			<div id="ends-with-selector-1-area" class="testcase-area">
-				<div id="ends-with-selector-1-fail-1" style="color: white; width: 202px;" class="eh-sibling" data-expectedresult="fail" aria-label="ends-with-selector-1-fail">Target</div>
-				<div class="testcase-examplecontent" aria-label="ends-with-selector-1-example">Example Content</div>
+			<div class="testcase-area">
+				<div style="color: white; width: 202px;" class="eh-sibling" data-expectedresult="fail">Target</div>
+				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -337,18 +336,18 @@
 				<li>The red element should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="ends-with-selector-1-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io##div[style$="width: 202px;"]</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="contains-section" class="testcase-panel">
-			<h2 aria-label="test-case-contains" id="contains">Contains</h2>
+		<section class="testcase-panel">
+			<h2>Contains</h2>
 			<p>Test that an element hiding filter using a contains selector hides its target.</p>
-			<div id="contains-area" class="testcase-area">
-				<div id="contains-fail-1" style="color: white; width: 203px;" class="eh-sibling" data-expectedresult="fail" aria-label="contains-fail">Target</div>
-				<div class="testcase-examplecontent" aria-label="contains-example">Example Content</div>
+			<div class="testcase-area">
+				<div style="color: white; width: 203px;" class="eh-sibling" data-expectedresult="fail">Target</div>
+				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -357,7 +356,7 @@
 				<li>The red element should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="contains-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io##div[style*="width: 203px;"]</pre>
 				</li>
@@ -368,11 +367,11 @@
 		<section class="site-panel">
 			<h2>Blocking</h2>
 		</section>
-		<section id="full-path-section" class="testcase-panel">
-			<h2 aria-label="test-case-full-path" id="full-path">Full Path</h2>
+		<section class="testcase-panel">
+			<h2>Full Path</h2>
 			<p>Test that a blocking filter describing a full path blocks its target.</p>
-			<div id="full-path-area" class="testcase-area">
-				<img id="full-path-fail-1" src="AB_Test/full-path.png" alt="BLOCKED!" data-expectedresult="fail">
+			<div class="testcase-area">
+				<img src="AB_Test/full-path.png" alt="BLOCKED!" data-expectedresult="fail">
 				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -382,17 +381,17 @@
 				<li>The red image should be blocked and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="full-path-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>rebelwcause.github.io/AB_Test/full-path.png</pre>
 				</li>
 			</ul>
 		</section>
-		<section id="partial-path-section" class="testcase-panel">
-			<h2 aria-label="test-case-partial-path" id="partial-path">Partial Path</h2>
+		<section class="testcase-panel">
+			<h2>Partial Path</h2>
 			<p>Test that a blocking filter describing a partial path blocks its target.</p>
-			<div id="partial-path-area" class="testcase-area">
-				<img id="partial-path-fail-1" src="AB_Test/partial-path.png" alt="BLOCKED!" data-expectedresult="fail">
+			<div class="testcase-area">
+				<img src="AB_Test/partial-path.png" alt="BLOCKED!" data-expectedresult="fail">
 				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -402,15 +401,15 @@
 				<li>The red image should be blocked and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
-			<ul id="partial-path-filters" class="testcase-filters">
+			<ul class="testcase-filters">
 				<li>
 					<pre>/AB_Test/partial-</pre>
 				</li>
 			</ul>
 		</section>
 
-		<section id="dynamic-section" class="testcase-panel">
-			<h2 aria-label="test-case-dynamic" id="dynamic">Dynamic</h2>
+		<section class="testcase-panel">
+			<h2>Dynamic</h2>
 			<p>Test that a blocking filter describing a path of a resource that is later dynamically added to the page blocks its target.</p>
 			<div id="blocking-dynamic" class="testcase-area">
 				<div class="testcase-examplecontent">Example Content</div>
@@ -421,11 +420,12 @@
 					<li>The red image should be blocked and the space collapsed.</li>
 				</ul>
 				<h3>Filters</h3>
-				<ul id="dynamic-filters" class="testcase-filters">
+				<ul class="testcase-filters">
 					<li>
 						<pre>/AB_Test/dynamic.png</pre>
 					</li>
 				</ul>
+			</div>
 		</section>
 		<script>
 			"use strict";
