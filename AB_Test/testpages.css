@@ -115,6 +115,13 @@ a { color: inherit; }
   background-color: #c70d2c;
 }
 
+[data-expectedresult="pass"] {
+  flex-grow: 1;
+  padding: 0.5em;
+  color: #000;
+  background-color: #0dc74b;
+}
+
 .testcase-trigger[data-expectedresult="fail"]:hover {
   background-color: #c70d2c;
 }
