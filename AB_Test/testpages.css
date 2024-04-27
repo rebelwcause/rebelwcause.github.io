@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -169,7 +169,6 @@ a { color: inherit; }
 }
 
 .testcase-examplecontent,
-.testcase-expected-view,
 [data-expectedresult="pass"] {
   flex-grow: 1;
   padding: 0.5em;
@@ -192,11 +191,7 @@ a { color: inherit; }
   background-color: #c70d2c;
 }
 
-img[data-expectedresult="pass"],
-img.testcase-expected-view,
-audio.testcase-expected-view,
-video.testcase-expected-view,
-iframe.testcase-expected-view {
+img[data-expectedresult="pass"] {
   flex-grow: 0;
   padding: 0;
   background-color: transparent;
@@ -205,19 +200,6 @@ iframe.testcase-expected-view {
 img[data-expectedresult="fail"] {
   flex-grow: 0;
   padding: 0;
-}
-
-.expected-view [data-expectedresult="pass"],
-.expected-view [data-expectedresult="fail"],
-.expected-view .testcase-trigger,
-.expected-view .testcase-waiting-content,
-.expected-view .testcase-nostyle,
-.testcase-expected-view {
-  display: none;
-}
-
-.expected-view .testcase-expected-view {
-  display: block;
 }
 
 img#img-eh {
