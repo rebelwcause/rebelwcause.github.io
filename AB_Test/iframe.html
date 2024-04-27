@@ -1,12 +1,27 @@
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="iframe_data/testpages.css">
-</head>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<script>
+		let nn = 0;
 
-<body>
-  <img id="iframe-fail-1" src="iframe_data/image.png" data-expectedresult="fail" data-dp="fail">
-  <div class="testcase-expected-view">Exception target</div>
-  <div id="iframe-pass-1" class="targ-elemhide" data-expectedresult="pass" data-dp="pass">Exception target</div>
-  <div class="testcase-examplecontent">Example Content</div>
+		const intCallback = function (element)
+		{
+			let newnode = document.createElement('p');
+			newnode.textContent = ' New Node class .ProductAd' + ++nn;
+			newnode.classList.add('ProductAd');
+			newnode.style.cssText = 'width: 500px; height: 100px; background-color: #FF0000;';
+			document.body.appendChild(newnode)
+		};
 
-</body></html>
+		setInterval(intCallback, 5000);
+
+	</script>
+	</head>
+	<body>
+		<div>This is an iframe!</div>
+		<div id='ad_slider_bad'>div id='ad_slider_bad'</div>
+		<div class='PencilAd'>div class='PencilAd'</div>
+		<gpt-ad>gpt-ad element</gpt-ad>
+		<div id='AdBanner'>div id='AdBanner'</div>
+	</body>
+</html>">
