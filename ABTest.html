@@ -22,9 +22,9 @@
 			<h2 aria-label="test-case-basic-usage" id="basic-usage">Basic usage</h2>
 			<p>Test that a basic block filter.</p>
 			<div id="basic-usage-area" class="testcase-area">
-				<img id="basic-usage-fail-1" src="AB_Test/specific.png" data-expectedresult="fail" data-dp="fail">
+				<img id="basic-usage-fail-1" src="AB_Test/specific.png" alt="BLOCKED!" data-expectedresult="fail" data-dp="fail">
 				<img src="AB_Test/expected.png" class="testcase-expected-view">
-				<img id="basic-usage-pass-1" src="AB_Test/generic.png" data-expectedresult="pass" data-dp="pass">
+				<img id="basic-usage-pass-1" src="AB_Test/generic.png" alt="BLOCKED!" data-expectedresult="pass" data-dp="pass">
 				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -373,7 +373,7 @@
 			<h2 aria-label="test-case-full-path" id="full-path">Full Path</h2>
 			<p>Test that a blocking filter describing a full path blocks its target.</p>
 			<div id="full-path-area" class="testcase-area">
-				<img id="full-path-fail-1" src="AB_Test/full-path.png" data-expectedresult="fail" data-dp="fail">
+				<img id="full-path-fail-1" src="AB_Test/full-path.png" alt="BLOCKED!" data-expectedresult="fail" data-dp="fail">
 				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -385,7 +385,7 @@
 			<h3>Filters</h3>
 			<ul id="full-path-filters" class="testcase-filters">
 				<li>
-					<pre>rebelwcause.github.io/testfiles/blocking/full-path.png</pre>
+					<pre>rebelwcause.github.io/AB_Test/full-path.png</pre>
 				</li>
 			</ul>
 		</section>
@@ -393,7 +393,7 @@
 			<h2 aria-label="test-case-partial-path" id="partial-path">Partial Path</h2>
 			<p>Test that a blocking filter describing a partial path blocks its target.</p>
 			<div id="partial-path-area" class="testcase-area">
-				<img id="partial-path-fail-1" src="AB_Test/partial-path.png" data-expectedresult="fail" data-dp="fail">
+				<img id="partial-path-fail-1" src="AB_Test/partial-path.png" alt="BLOCKED!" data-expectedresult="fail" data-dp="fail">
 				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -434,6 +434,7 @@
 			image.src = "AB_Test/dynamic.png";
 			image.setAttribute("data-expectedresult", "fail");
 			image.setAttribute("data-dp", "fail");
+			image.setAttribute("alt", "BLOCKED!");
 			image.id = "dynamic-fail-1";
 			let area = document.getElementById("blocking-dynamic");
 			area.appendChild(image);
