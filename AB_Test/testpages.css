@@ -116,9 +116,6 @@ a { color: inherit; }
 }
 
 [data-expectedresult="pass"] {
-  flex-grow: 1;
-  padding: 0.5em;
-  color: #000;
   background-color: #0dc74b;
 }
 
