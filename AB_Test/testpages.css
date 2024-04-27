@@ -161,11 +161,11 @@ a { color: inherit; }
   flex-grow: 1;
   padding: 0.5em;
   color: #fff;
-  background-color: #ccc;
+  background-color: #444;
 }
 
 .testcase-trigger:hover {
-  background-color: #aaa;
+  background-color: #888;
 }
 
 .testcase-examplecontent,
