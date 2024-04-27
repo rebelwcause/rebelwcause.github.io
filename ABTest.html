@@ -15,8 +15,9 @@
 		</header>
 
 		<section class="site-panel">
-			<h2>General Block</h2>
+			<h2>Blocking</h2>
 		</section>
+
 		<section class="testcase-panel">
 			<h2>Basic usage</h2>
 			<p>Test a basic block filter.</p>
@@ -43,6 +44,81 @@
 				</li>
 			</ul>
 		</section>
+
+		<section class="testcase-panel">
+			<h2>Full Path</h2>
+			<p>Test that a blocking filter describing a full path blocks its target.</p>
+			<div class="testcase-area">
+				<img src="AB_Test/full-path.png" data-expectedresult="pass" alt="BLOCKED!">
+				<div class="testcase-examplecontent">Example Content</div>
+			</div>
+			<h3>Steps</h3>
+			<ul class="testcase-steps">
+				<li>Add filter #1.</li>
+				<li>Clear Cache and Refresh page.</li>
+				<li>The red image should be blocked and the space collapsed.</li>
+			</ul>
+			<h3>Filters</h3>
+			<ul class="testcase-filters">
+				<li>
+					<pre>URL Filter: rebelwcause.github.io/AB_Test/full-path.png</pre>
+					<pre>Site CSS Filter: rebelwcause.github.io##img[src="AB_Test/full-path.png"]</pre>
+				</li>
+			</ul>
+		</section>
+		<section class="testcase-panel">
+			<h2>Partial Path</h2>
+			<p>Test that a blocking filter describing a partial path blocks its target.</p>
+			<div class="testcase-area">
+				<img src="AB_Test/partial-path.png" data-expectedresult="pass" alt="BLOCKED!">
+				<div class="testcase-examplecontent">Example Content</div>
+			</div>
+			<h3>Steps</h3>
+			<ul class="testcase-steps">
+				<li>Add filter #1.</li>
+				<li>Clear Cache and Refresh page.</li>
+				<li>The red image should be blocked and the space collapsed.</li>
+			</ul>
+			<h3>Filters</h3>
+			<ul class="testcase-filters">
+				<li>
+					<pre>URL Filter: /AB_Test/partial-</pre>
+					<pre>General CSS Filter (All Sites): img[src="AB_Test/partial-path.png"]</pre>
+				</li>
+			</ul>
+		</section>
+
+		<section class="testcase-panel">
+			<h2>Dynamic</h2>
+			<p>Test that a blocking filter describing a path of a resource that is later dynamically added to the page blocks its target.</p>
+			<div id="blocking-dynamic" class="testcase-area">
+				<div class="testcase-examplecontent">Example Content</div>
+				<h3>Steps</h3>
+				<ul class="testcase-steps">
+					<li>Add filter #1.</li>
+					<li>Clear Cache and Refresh page.</li>
+					<li>The red image should be blocked and the space collapsed.</li>
+				</ul>
+				<h3>Filters</h3>
+				<ul class="testcase-filters">
+					<li>
+						<pre>URL Filter: /AB_Test/dynamic.png</pre>
+						<pre>General CSS Filter (All Sites): img[src="AB_Test/dynamic.png"]</pre>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<script>
+			"use strict";
+			let image = document.createElement("img");
+			image.src = "AB_Test/dynamic.png";
+			image.setAttribute("data-expectedresult", "pass");
+			image.setAttribute("alt", "BLOCKED!");
+			image.id = "dynamic-fail-1";
+			let area = document.getElementById("blocking-dynamic");
+			area.appendChild(image);
+		</script>
+
 
 		<section class="site-panel">
 			<h2>Popup</h2>
@@ -390,84 +466,6 @@
 				</li>
 			</ul>
 		</section>
-
-
-		<section class="site-panel">
-			<h2>Blocking</h2>
-		</section>
-		<section class="testcase-panel">
-			<h2>Full Path</h2>
-			<p>Test that a blocking filter describing a full path blocks its target.</p>
-			<div class="testcase-area">
-				<img src="AB_Test/full-path.png" data-expectedresult="pass" alt="BLOCKED!">
-				<div class="testcase-examplecontent">Example Content</div>
-			</div>
-			<h3>Steps</h3>
-			<ul class="testcase-steps">
-				<li>Add filter #1.</li>
-				<li>Clear Cache and Refresh page.</li>
-				<li>The red image should be blocked and the space collapsed.</li>
-			</ul>
-			<h3>Filters</h3>
-			<ul class="testcase-filters">
-				<li>
-					<pre>URL Filter: rebelwcause.github.io/AB_Test/full-path.png</pre>
-					<pre>Site CSS Filter: rebelwcause.github.io##img[src="AB_Test/full-path.png"]</pre>
-				</li>
-			</ul>
-		</section>
-		<section class="testcase-panel">
-			<h2>Partial Path</h2>
-			<p>Test that a blocking filter describing a partial path blocks its target.</p>
-			<div class="testcase-area">
-				<img src="AB_Test/partial-path.png" data-expectedresult="pass" alt="BLOCKED!">
-				<div class="testcase-examplecontent">Example Content</div>
-			</div>
-			<h3>Steps</h3>
-			<ul class="testcase-steps">
-				<li>Add filter #1.</li>
-				<li>Clear Cache and Refresh page.</li>
-				<li>The red image should be blocked and the space collapsed.</li>
-			</ul>
-			<h3>Filters</h3>
-			<ul class="testcase-filters">
-				<li>
-					<pre>URL Filter: /AB_Test/partial-</pre>
-					<pre>General CSS Filter (All Sites): img[src="AB_Test/partial-path.png"]</pre>
-				</li>
-			</ul>
-		</section>
-
-		<section class="testcase-panel">
-			<h2>Dynamic</h2>
-			<p>Test that a blocking filter describing a path of a resource that is later dynamically added to the page blocks its target.</p>
-			<div id="blocking-dynamic" class="testcase-area">
-				<div class="testcase-examplecontent">Example Content</div>
-				<h3>Steps</h3>
-				<ul class="testcase-steps">
-					<li>Add filter #1.</li>
-					<li>Clear Cache and Refresh page.</li>
-					<li>The red image should be blocked and the space collapsed.</li>
-				</ul>
-				<h3>Filters</h3>
-				<ul class="testcase-filters">
-					<li>
-						<pre>URL Filter: /AB_Test/dynamic.png</pre>
-						<pre>General CSS Filter (All Sites): img[src="AB_Test/dynamic.png"]</pre>
-					</li>
-				</ul>
-			</div>
-		</section>
-		<script>
-			"use strict";
-			let image = document.createElement("img");
-			image.src = "AB_Test/dynamic.png";
-			image.setAttribute("data-expectedresult", "pass");
-			image.setAttribute("alt", "BLOCKED!");
-			image.id = "dynamic-fail-1";
-			let area = document.getElementById("blocking-dynamic");
-			area.appendChild(image);
-		</script>
 
 	</body>
 </html>
