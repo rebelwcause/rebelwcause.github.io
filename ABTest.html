@@ -22,8 +22,8 @@
 			<h2 aria-label="test-case-basic-usage" id="basic-usage">Basic usage</h2>
 			<p>Test that a basic block filter.</p>
 			<div id="basic-usage-area" class="testcase-area">
-				<img id="basic-usage-fail-1" src="AB_Test/specific.png" alt="BLOCKED!" data-expectedresult="fail" data-dp="fail">
-				<img id="basic-usage-pass-1" src="AB_Test/generic.png" alt="BLOCKED!" data-expectedresult="pass" data-dp="pass">
+				<img id="basic-usage-fail-1" src="AB_Test/specific.png" alt="BLOCKED!" data-expectedresult="fail">
+				<img id="basic-usage-pass-1" src="AB_Test/generic.png" alt="BLOCKED!" data-expectedresult="pass">
 				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -51,7 +51,7 @@
 			<h2 aria-label="test-case-link-based-popup" id="link-based-popup">Link based popup</h2>
 			<p>Test that a filter using the $popup filter option works on a link based popup.</p>
 			<div id="link-based-popup-area" class="testcase-area">
-				<a href="AB_Test/link.html" target="_blank" class="testcase-trigger" data-dp="popup-link">Trigger link based popup</a>
+				<a href="AB_Test/link.html" target="_blank" class="testcase-trigger">Trigger link based popup</a>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -71,7 +71,7 @@
 			<h2 aria-label="test-case-script-based-popup-tab" id="script-based-popup-tab">Script based popup (tab)</h2>
 			<p>Test that a filter using the $popup filter option works on a script based popup.</p>
 			<div id="script-based-popup-tab-area" class="testcase-area">
-				<a href="#script-based-popup-tab" class="testcase-trigger" onclick="scriptPopupTab();" data-dp="popup-script">Trigger script based popup (tab)</a>
+				<a href="#script-based-popup-tab" class="testcase-trigger" onclick="scriptPopupTab();">Trigger script based popup (tab)</a>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -127,7 +127,7 @@
 			<h2 aria-label="test-case-id-selector" id="id-selector">ID Selector</h2>
 			<p>Test that an element hiding filter using an ID selector hides its target.</p>
 			<div id="id-selector-area" class="testcase-area">
-				<div id="eh-id" data-expectedresult="fail" data-dp="fail" aria-label="id-selector-fail">Target</div>
+				<div id="eh-id" data-expectedresult="fail" aria-label="id-selector-fail">Target</div>
 				<div class="testcase-examplecontent" aria-label="id-selector-example">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -147,7 +147,7 @@
 			<h2 aria-label="test-case-id-selector-with-double-curly-braces" id="id-selector-with-double-curly-braces">ID Selector with double curly braces</h2>
 			<p>Test that an element hiding filter using an ID selector with two curly braces hides its target.</p>
 			<div id="id-selector-with-double-curly-braces-area" class="testcase-area">
-				<div id="{{eh-id}}" data-expectedresult="fail" data-dp="fail" aria-label="id-selector-with-double-curly-braces-fail">Target</div>
+				<div id="{{eh-id}}" data-expectedresult="fail" aria-label="id-selector-with-double-curly-braces-fail">Target</div>
 				<div class="testcase-examplecontent" aria-label="id-selector-with-double-curly-braces-example">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -167,7 +167,7 @@
 			<h2 aria-label="test-case-class-selector" id="class-selector">Class Selector</h2>
 			<p>Test that an element hiding filter using a class selector hides its target.</p>
 			<div id="class-selector-area" class="testcase-area">
-				<div id="class-selector-fail-1" class="eh-class" data-expectedresult="fail" data-dp="fail" aria-label="class-selector-fail">Target</div>
+				<div id="class-selector-fail-1" class="eh-class" data-expectedresult="fail" aria-label="class-selector-fail">Target</div>
 				<div class="testcase-examplecontent" aria-label="class-selector-example">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -187,7 +187,7 @@
 			<h2 aria-label="test-case-descendant-selector" id="descendant-selector">Descendant Selector</h2>
 			<p>Test that an element hiding filter using a descendant selector hides its target.</p>
 			<div id="descendant-selector-area" class="testcase-area">
-				<div id="descendant-selector-fail-1" class="eh-descendant" data-expectedresult="fail" data-dp="fail" aria-label="descendant-selector-fail">Target</div>
+				<div id="descendant-selector-fail-1" class="eh-descendant" data-expectedresult="fail" aria-label="descendant-selector-fail">Target</div>
 				<div class="testcase-examplecontent" aria-label="descendant-selector-example">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -208,7 +208,7 @@
 			<p>Test that an element hiding filter using a sibling selector hides its target.</p>
 			<div id="sibling-selector-area" class="testcase-area">
 				<div class="testcase-examplecontent" aria-label="sibling-selector-example">Example Content</div>
-				<div id="sibling-selector-fail-1" class="eh-sibling" data-expectedresult="fail" data-dp="fail" aria-label="sibling-selector-fail">Target</div>
+				<div id="sibling-selector-fail-1" class="eh-sibling" data-expectedresult="fail" aria-label="sibling-selector-fail">Target</div>
 			</div>
 			<h3>Steps</h3>
 			<ul class="testcase-steps">
@@ -227,7 +227,7 @@
 			<h2 aria-label="test-case-attribute-selector-1" id="attribute-selector-1">Attribute Selector 1</h2>
 			<p>Test that an element hiding filter using an attribute selector hides its target.</p>
 			<div id="attribute-selector-1-area" class="testcase-area">
-				<div id="attribute-selector-1-fail-1" width="100" height="100" class="eh-sibling" data-expectedresult="fail" data-dp="fail" aria-label="attribute-selector-1-fail">Target</div>
+				<div id="attribute-selector-1-fail-1" width="100" height="100" class="eh-sibling" data-expectedresult="fail" aria-label="attribute-selector-1-fail">Target</div>
 				<div class="testcase-examplecontent" aria-label="attribute-selector-1-example">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -247,7 +247,7 @@
 			<h2 aria-label="test-case-attribute-selector-2" id="attribute-selector-2">Attribute Selector 2</h2>
 			<p>Test that an element hiding filter using an attribute selector hides its target.</p>
 			<div id="attribute-selector-2-area" class="testcase-area">
-				<div id="attribute-selector-2-fail-1" href="http://testcase-attribute.com/" class="eh-sibling" data-expectedresult="fail" data-dp="fail" aria-label="attribute-selector-2-fail">Target</div>
+				<div id="attribute-selector-2-fail-1" href="http://testcase-attribute.com/" class="eh-sibling" data-expectedresult="fail" aria-label="attribute-selector-2-fail">Target</div>
 				<div class="testcase-examplecontent" aria-label="attribute-selector-2-example">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -267,7 +267,7 @@
 			<h2 aria-label="test-case-attribute-selector-3" id="attribute-selector-3">Attribute Selector 3</h2>
 			<p>Test that an element hiding filter using an attribute selector hides its target.</p>
 			<div id="attribute-selector-3-area" class="testcase-area">
-				<div id="attribute-selector-3-fail-1" style="width: 200px;" class="eh-sibling" data-expectedresult="fail" data-dp="fail" aria-label="attribute-selector-3-fail">Target</div>
+				<div id="attribute-selector-3-fail-1" style="width: 200px;" class="eh-sibling" data-expectedresult="fail" aria-label="attribute-selector-3-fail">Target</div>
 				<div class="testcase-examplecontent" aria-label="attribute-selector-3-example">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -287,7 +287,7 @@
 			<h2 aria-label="test-case-starts-with-selector-1" id="starts-with-selector-1">Starts with Selector 1</h2>
 			<p>Test that an element hiding filter using a starts with selector hides its target.</p>
 			<div id="starts-with-selector-1-area" class="testcase-area">
-				<div id="starts-with-selector-1-fail-1" href="http://testcase-startswith.com/test" class="eh-sibling" data-expectedresult="fail" data-dp="fail" aria-label="starts-with-selector-1-fail">Target</div>
+				<div id="starts-with-selector-1-fail-1" href="http://testcase-startswith.com/test" class="eh-sibling" data-expectedresult="fail" aria-label="starts-with-selector-1-fail">Target</div>
 				<div class="testcase-examplecontent" aria-label="starts-with-selector-1-example">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -307,7 +307,7 @@
 			<h2 aria-label="test-case-starts-with-selector-2" id="starts-with-selector-2">Starts with Selector 2</h2>
 			<p>Test that an element hiding filter using a starts with selector hides its target.</p>
 			<div id="starts-with-selector-2-area" class="testcase-area">
-				<div id="starts-with-selector-2-fail-1" style="width: 201px; color: white;" class="eh-sibling" data-expectedresult="fail" data-dp="fail" aria-label="starts-with-selector-2-fail">Target</div>
+				<div id="starts-with-selector-2-fail-1" style="width: 201px; color: white;" class="eh-sibling" data-expectedresult="fail" aria-label="starts-with-selector-2-fail">Target</div>
 				<div class="testcase-examplecontent" aria-label="starts-with-selector-2-example">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -327,7 +327,7 @@
 			<h2 aria-label="test-case-ends-with-selector-1" id="ends-with-selector-1">Ends with Selector 1</h2>
 			<p>Test that an element hiding filter using a ends with selector hides its target.</p>
 			<div id="ends-with-selector-1-area" class="testcase-area">
-				<div id="ends-with-selector-1-fail-1" style="color: white; width: 202px;" class="eh-sibling" data-expectedresult="fail" data-dp="fail" aria-label="ends-with-selector-1-fail">Target</div>
+				<div id="ends-with-selector-1-fail-1" style="color: white; width: 202px;" class="eh-sibling" data-expectedresult="fail" aria-label="ends-with-selector-1-fail">Target</div>
 				<div class="testcase-examplecontent" aria-label="ends-with-selector-1-example">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -347,7 +347,7 @@
 			<h2 aria-label="test-case-contains" id="contains">Contains</h2>
 			<p>Test that an element hiding filter using a contains selector hides its target.</p>
 			<div id="contains-area" class="testcase-area">
-				<div id="contains-fail-1" style="color: white; width: 203px;" class="eh-sibling" data-expectedresult="fail" data-dp="fail" aria-label="contains-fail">Target</div>
+				<div id="contains-fail-1" style="color: white; width: 203px;" class="eh-sibling" data-expectedresult="fail" aria-label="contains-fail">Target</div>
 				<div class="testcase-examplecontent" aria-label="contains-example">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -372,7 +372,7 @@
 			<h2 aria-label="test-case-full-path" id="full-path">Full Path</h2>
 			<p>Test that a blocking filter describing a full path blocks its target.</p>
 			<div id="full-path-area" class="testcase-area">
-				<img id="full-path-fail-1" src="AB_Test/full-path.png" alt="BLOCKED!" data-expectedresult="fail" data-dp="fail">
+				<img id="full-path-fail-1" src="AB_Test/full-path.png" alt="BLOCKED!" data-expectedresult="fail">
 				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -392,7 +392,7 @@
 			<h2 aria-label="test-case-partial-path" id="partial-path">Partial Path</h2>
 			<p>Test that a blocking filter describing a partial path blocks its target.</p>
 			<div id="partial-path-area" class="testcase-area">
-				<img id="partial-path-fail-1" src="AB_Test/partial-path.png" alt="BLOCKED!" data-expectedresult="fail" data-dp="fail">
+				<img id="partial-path-fail-1" src="AB_Test/partial-path.png" alt="BLOCKED!" data-expectedresult="fail">
 				<div class="testcase-examplecontent">Example Content</div>
 			</div>
 			<h3>Steps</h3>
@@ -432,7 +432,6 @@
 			let image = document.createElement("img");
 			image.src = "AB_Test/dynamic.png";
 			image.setAttribute("data-expectedresult", "fail");
-			image.setAttribute("data-dp", "fail");
 			image.setAttribute("alt", "BLOCKED!");
 			image.id = "dynamic-fail-1";
 			let area = document.getElementById("blocking-dynamic");
