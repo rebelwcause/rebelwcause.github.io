@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-	<style>
-		body {
-		color: #fff;
-		background-color: #0dc74b;
-		}
-	</style>
-	<script>
-		let nn = 0;
+		<title>AB Test IFrame</title>
+		<style>
+			body {
+			color: #fff;
+			background-color: #0dc74b;
+			}
+		</style>
+		<script>
+			let nn = 0;
 
-		const intCallback = function (element)
-		{
-			let newnode = document.createElement('p');
-			newnode.textContent = ' Ad Node class .testAd ' + ++nn;
-			newnode.classList.add('testAd');
-			newnode.style.cssText = 'width: 400px; height: 50px; background-color: #FF0000;';
-			document.body.appendChild(newnode)
-		};
+			const intCallback = function (element)
+			{
+				let newnode = document.createElement('p');
+				newnode.textContent = ' Ad Node class .testAd ' + ++nn;
+				newnode.classList.add('testAd');
+				newnode.style.cssText = 'width: 400px; height: 50px; background-color: #FF0000;';
+				document.body.appendChild(newnode)
+			};
 
-		setInterval(intCallback, 2500);
+			setInterval(intCallback, 2500);
 
-	</script>
+		</script>
 	</head>
 	<body>
 		<div>This is an iframe</div>
