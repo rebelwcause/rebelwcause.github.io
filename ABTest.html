@@ -35,7 +35,7 @@
 			<ul class="testcase-filters">
 				<li>
 					<pre>General URL Filter: /AB_Test/generic.png</pre>
-					<pre>General CSS Filter: ##img[src="AB_Test/generic.png"]</pre>
+					<pre>General CSS Filter (All Sites): img[src="AB_Test/generic.png"]</pre>
 				</li>
 				<li>
 					<pre>Site URL Filter: rebelwcause.github.io/AB_Test/specific.png</pre>
@@ -123,6 +123,33 @@
 		<section class="site-panel">
 			<h2>Element Hiding</h2>
 		</section>
+
+		<section class="testcase-panel">
+			<h2>Custom Tag Selector</h2>
+			<p>Test that an element hiding filter using a Custom tag selector hides its target.</p>
+			<div class="testcase-area">
+				<custom-ttag1 data-expectedresult="fail">Target</custom-ttag1>
+				<div class="testcase-examplecontent">Example Content</div>
+				<custom-ttag2 data-expectedresult="fail">Target</custom-ttag2>
+			</div>
+			<h3>Steps</h3>
+			<ul class="testcase-steps">
+				<li>Add filter #1 and filter #2.</li>
+				<li>Refresh page.</li>
+				<li>Both red images should be hidden and the space collapsed.</li>
+			</ul>
+			<h3>Filters</h3>
+			<ul class="testcase-filters">
+				<li>
+					<pre>General CSS Filter (All Sites): custom-ttag1</pre>
+				</li>
+				<li>
+					<pre>Site CSS Filter: rebelwcause.github.io##custom-ttag2</pre>
+				</li>
+			</ul>
+		</section>
+
+
 		<section class="testcase-panel">
 			<h2>ID Selector</h2>
 			<p>Test that an element hiding filter using an ID selector hides its target.</p>
@@ -406,7 +433,7 @@
 			<ul class="testcase-filters">
 				<li>
 					<pre>General URL Filter: /AB_Test/partial-</pre>
-					<pre>General CSS Filter: ##img[src="AB_Test/partial-path.png"]</pre>
+					<pre>General CSS Filter (All Sites): img[src="AB_Test/partial-path.png"]</pre>
 				</li>
 			</ul>
 		</section>
@@ -426,7 +453,7 @@
 				<ul class="testcase-filters">
 					<li>
 						<pre>General URL Filter: /AB_Test/dynamic.png</pre>
-						<pre>General CSS Filter: ##img[src="AB_Test/dynamic.png"]</pre>
+						<pre>General CSS Filter (All Sites): img[src="AB_Test/dynamic.png"]</pre>
 					</li>
 				</ul>
 			</div>
