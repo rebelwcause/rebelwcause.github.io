@@ -146,9 +146,8 @@ async function fetchTests()
 	}
 }
 
-
-window.onload = function() {
+window.addEventListener("load", (event) => {
 	fetchTests().then((result) => {
 		console.log("All tests completed");
 	});
-};
+});
