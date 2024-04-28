@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -35,16 +35,16 @@ a {
 .site-panel {
     background-color: lightskyblue;
     padding: 0.1em 1em 0.1em 1em;
-    margin-top: 0.5em;
+    /* margin-top: 0.5em; */
 }
 
 .testcase-panel * {
     margin: 0;
-    line-height: 1.4em;
+    /* line-height: 1.4em; */
 }
 
 .testcase-panel {
-    margin-top: 0.5em;
+    /* margin-top: 0.5em; */
     border: 1px solid #ccc;
     background-color: #fff;
 }
