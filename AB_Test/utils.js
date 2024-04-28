@@ -78,14 +78,6 @@ async function check_url(url, div, parent, np) {
 	// Lets set up our `AbortController`, and create a request options object
 	// that includes the controller's `signal` to pass to `fetch`.
 	const controller = new AbortController();
-	//const config = {
-	//	...{
-	//		method: 'HEAD',
-	//		mode: 'no-cors'
-	//	},
-	//	signal: controller.signal
-	//};
-
 	const config = {
 		method: 'HEAD',
 		mode: 'no-cors',
@@ -101,7 +93,7 @@ async function check_url(url, div, parent, np) {
 	var hostDiv = document.createElement("div");
 	hostDiv.innerHTML = url;
 	div.appendChild(hostDiv);
-	await fetch(url + "/fakepage.html", config, timeout, parent, div).then(response => {
+	await fetch(url, config, timeout, parent, div).then(response => {
 			console.log(response);
 			hostDiv.style.cssText = "background-color: #C70D2C; color: #FFF;";
 		}) //Response was received --> ads are NOT blocked
