@@ -492,7 +492,7 @@
 
 		<section class="testcase-panel">
 			<h2>IFrames</h2>
-			<p>Test blocking iframes.</p>
+			<p>Test blocking content in iframes.</p>
 			<div class="testcase-area">
 				<iframe src="AB_Test/iframe.html" style="margin-left: 25px; border: 0; width: 1200px; height: 400px;"></iframe>
 			</div>
@@ -500,7 +500,7 @@
 			<ul class="testcase-steps">
 				<li>Add filter #1.</li>
 				<li>Clear Cache and Refresh page.</li>
-				<li>The red elements should be hidden and the space collapsed.</li>
+				<li>The red elements inside the iframe should be hidden and the space collapsed.</li>
 			</ul>
 			<h3>Filters</h3>
 			<ul class="testcase-filters">
@@ -594,6 +594,9 @@
 			rebelwcause.github.io##div[style$="width: 202px;"]
 			rebelwcause.github.io##div[style*="width: 203px;"]
 			rebelwcause.github.io##.testAd
+
+		Script Scanning Filters
+			ab_spy_test_element::false
 
 		CSS Site Injection
 			rebelwcause.github.io##body { background-color: #FFEEEE !important; }
