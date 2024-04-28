@@ -81,8 +81,7 @@ async function check_url(url, div, parent)
 	const controller = new AbortController();
 	const config = {
 		method: 'HEAD',
-		//mode: 'no-cors',
-		mode: 'cors',
+		mode: 'no-cors',
 		signal: controller.signal
 	};
 	// Set a timeout limit for the request using `setTimeout`. If the body
