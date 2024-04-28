@@ -74,13 +74,15 @@ const data = {
 };
 
 // Function to check an url and set red/green result
-async function check_url(url, div, parent, np) {
+async function check_url(url, div, parent)
+{
 	// Lets set up our `AbortController`, and create a request options object
 	// that includes the controller's `signal` to pass to `fetch`.
 	const controller = new AbortController();
 	const config = {
 		method: 'HEAD',
-		mode: 'no-cors',
+		//mode: 'no-cors',
+		mode: 'cors',
 		signal: controller.signal
 	};
 	// Set a timeout limit for the request using `setTimeout`. If the body
