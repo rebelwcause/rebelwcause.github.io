@@ -1,6 +1,6 @@
 "use strict";
 
-/* jshint esversion: 9 */
+/* jshint esversion: 6 */
 
 window.onload = function() {
 	let ab_spy_test_element = document.getElementById("spy-script-div");
