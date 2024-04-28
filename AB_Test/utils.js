@@ -99,8 +99,8 @@ const data = {
 			"https://pixel.rubiconproject.com",
 			"https://js-sec.indexww.com",
 			"https://ads.pubmatic.com",
-			"https://sst.teamsimmer.com",
-			"https://sgtm.simoahava.com",
+			"https://sst.teamsimmer.com/gtm.js?id=GTM-M5WNG39",
+			"https://sgtm.simoahava.com/gtm.js?id=GTM-PZ7GMV9",
 			"https://gtm.bswhealth.com",
 		]
 	},
