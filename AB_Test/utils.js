@@ -3,7 +3,7 @@
 /* jshint esversion: 9 */
 
 const data = {
-	"Ads": { //Ads
+	"Ads": {
 		"Google Ads": ["https://pagead2.googlesyndication.com",
 			"https://adservice.google.com",
 			"https://pagead2.googleadservices.com"],
@@ -22,6 +22,7 @@ const data = {
 			"https://amazonclix.com"],
 		"Microsoft": ["https://acdn.adnxs.com",
 			"https://acdn.adnxs-simple.com",
+			"https://v.clarity.ms",
 			"https://bat.bing.com"]
 	},
 	"Analytics": {
@@ -46,6 +47,17 @@ const data = {
 			"https://app.bugsnag.com"],
 		"Sentry": ["https://browser.sentry-cdn.com",
 			"https://app.getsentry.com"]
+	},
+	"CNAME Trackers": {
+		"Adobe": [
+			"https://smetrics.babycenter.ca",
+			"https://smetrics.cbc.ca",
+			"https://smetrics.costco.ca",
+			"https://smetrics.globalnews.ca",
+		],
+		"Dataunlocker": [
+			"https://7mvmjg.www.emanualonline.com"
+		]
 	},
 	"Social Trackers": {
 		"Facebook": ["https://pixel.facebook.com",
