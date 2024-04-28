@@ -50,14 +50,21 @@ const data = {
 	},
 	"CNAME Trackers": {
 		"Adobe": [
-			"https://smetrics.babycenter.ca",
+			"https://swasc.homedepot.ca",
 			"https://smetrics.cbc.ca",
 			"https://smetrics.costco.ca",
 			"https://smetrics.globalnews.ca",
 		],
 		"Dataunlocker": [
-			"https://7mvmjg.www.emanualonline.com"
+			"https://7mvmjg.www.emanualonline.com",
+			"https://tutbc1.www.tapmyback.com"
+		],
+		"Acton": [
+			"https://info.augustahealth.org",
+			"https://marketing.dairyland.com",
+			"https://marketing.tourismpg.com"
 		]
+
 	},
 	"Social Trackers": {
 		"Facebook": ["https://pixel.facebook.com",
@@ -82,7 +89,21 @@ const data = {
 			"https://ads.tiktok.com",
 			"https://analytics-sg.tiktok.com",
 			"https://ads-sg.tiktok.com"]
-	}
+	},
+	"Miscellaneous": {
+		"Miscellaneous": [
+			"https://gumgum.com",
+			"https://tr.outbrain.com",
+			"https://tags.crwdcntrl.net",
+			"https://tlx.3lift.com",
+			"https://pixel.rubiconproject.com",
+			"https://js-sec.indexww.com",
+			"https://ads.pubmatic.com",
+			"https://sst.teamsimmer.com",
+			"https://sgtm.simoahava.com",
+			"https://gtm.bswhealth.com",
+		]
+	},
 };
 
 // Function to check an url and set red/green result
@@ -149,7 +170,6 @@ async function fetchTests()
 					{
 						fetches.push(check_url(value[i], dw, div));
 					}
-
 				}
 				else
 					fetches.push(check_url(value, dw, div));
