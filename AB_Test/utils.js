@@ -92,6 +92,8 @@ const data = {
 	},
 	"Miscellaneous": {
 		"Miscellaneous": [
+			"https://www.googletagmanager.com",
+			"https://ads.scorecardresearch.com",
 			"https://gumgum.com",
 			"https://tr.outbrain.com",
 			"https://tags.crwdcntrl.net",
