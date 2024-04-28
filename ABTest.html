@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="AB_Test/testpages.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="AB_Test/utils.js"></script>
+		<script src="AB_Test/spy_script.js"></script>
 	</head>
 	<body>
 		<header id="site-header">
@@ -492,6 +493,32 @@
 
 			</ul>
 		</section>
+
+
+
+
+		<section class="testcase-panel">
+			<h2>Script Scanning/Blocking</h2>
+			<p>Test Script Scanning/Blocking.</p>
+			<div class="testcase-area">
+				<div id="spy-script-div" data-expectedresult="pass">Target</div>
+				<div class="testcase-examplecontent">Example Content</div>
+			</div>
+			<h3>Steps</h3>
+			<ul class="testcase-steps">
+				<li>Add filter #1.</li>
+				<li>Clear Cache and Refresh page.</li>
+				<li>The red element should be hidden and the space collapsed.</li>
+			</ul>
+			<h3>Filters</h3>
+			<ul class="testcase-filters">
+				<li>
+					<pre>Script Scanning Rule: ab_spy_test_element::false</pre>
+				</li>
+			</ul>
+		</section>
+
+
 
 		<section class="testcase-panel">
 			<h2>Site CSS Injection</h2>
