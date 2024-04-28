@@ -14,8 +14,7 @@ const data = {
 			"https://ad.doubleclick.net",
 			"https://static.doubleclick.net",
 			"https://m.doubleclick.net",
-			"https://mediavisor.doubleclick.net"
-		],
+			"https://mediavisor.doubleclick.net"],
 		"Amazon": ["https://adtago.s3.amazonaws.com",
 			"https://analyticsengine.s3.amazonaws.com",
 			"https://advertising-api-eu.amazon.com",
@@ -61,10 +60,8 @@ const data = {
 		],
 		"Acton": [
 			"https://info.augustahealth.org",
-			"https://marketing.dairyland.com",
 			"https://marketing.tourismpg.com"
 		]
-
 	},
 	"Social Trackers": {
 		"Facebook": ["https://pixel.facebook.com",
