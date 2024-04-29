@@ -108,19 +108,32 @@ const data = {
 // Function to check an url and set red/green result
 async function check_url(url, div, parent)
 {
-	// Lets set up our `AbortController`, and create a request options object
-	// that includes the controller's `signal` to pass to `fetch`.
-	const controller = new AbortController();
-	const config = {
+	// Lets set up our 'AbortController', and create a request options object
+	// that includes the controller's 'signal' to pass to 'fetch'.
+	// AbortController does not exist in older ff versions...
+	let controller, sig;
+	try {
+		controller = new AbortController();
+		sig = controller.signal;
+	}
+	catch(error) {
+		//console.error(error);
+	}
+
+	let config = {
 		method: 'HEAD',
 		mode: 'no-cors',
-		signal: controller.signal
+		signal: sig
 	};
-	// Set a timeout limit for the request using `setTimeout`. If the body
-	// of this timeout is reached before the request is completed, it will
-	// be cancelled.
-	const timeout = setTimeout(() => {
-		controller.abort();
+	// Set a timeout limit for the request using 'setTimeout'. If the body
+	// of this timeout is reached before the request is completed, it will be cancelled.
+	let timeout = setTimeout(() => {
+		try {
+			controller.abort();
+		}
+		catch(error) {
+			//console.error(error);
+		}
 	}, 8000);
 
 	var hostDiv = document.createElement("div");
@@ -129,11 +142,11 @@ async function check_url(url, div, parent)
 	await fetch(url, config, timeout, parent, div).then(response => {
 			console.log(response);
 			hostDiv.style.cssText = "background-color: #C70D2C; color: #FFF;";
-		}) //Response was received --> ads are NOT blocked
+		}) // Response was received --> NOT Blocked
 		.catch(error => {
 			console.log(error.message);
 			hostDiv.style.cssText = "background-color: #BBFFBB;";
-		}); //No response --> ads are blocked
+		}); // No response --> Assume Blocked
 }
 
 
@@ -151,7 +164,6 @@ async function fetchTests()
 		var category = data[element];
 		for (let key in category)
 		{
-			//Set log test
 			var div = document.createElement('div');
 			const dw = document.createElement('div');
 			div.style.cssText = "padding-left: 20px;";
