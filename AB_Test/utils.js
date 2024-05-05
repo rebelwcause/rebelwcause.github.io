@@ -2,6 +2,60 @@
 
 /* jshint esversion: 9 */
 
+/*
+Firefox v 124.0.1 blocks many when tracking protection is enabled;
+
+resource at “<URL>” was blocked because content blocking is enabled. 47
+	resource at “https://acdn.adnxs.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://acdn.adnxs-simple.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://ad.doubleclick.net/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://ads-api.twitter.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://adservetx.media.net/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://adservice.google.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://ads.facebook.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://ads.linkedin.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://ads.pubmatic.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://ads.reddit.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://ads.scorecardresearch.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://ads-sg.tiktok.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://ads.tiktok.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://advertising.twitter.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://analytics.pointdrive.linkedin.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://analytics-sg.tiktok.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://analytics.tiktok.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://an.facebook.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://bat.bing.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://cdn.luckyorange.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://cs.luckyorange.net/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://doubleclick.net/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://d.reddit.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://google-analytics.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://gumgum.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://hotjar.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://js-sec.indexww.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://luckyorange.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://m.doubleclick.net/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://media.net/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://mediavisor.doubleclick.net/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://mouseflow.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://pagead2.googleadservices.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://pagead2.googlesyndication.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://pixel.facebook.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://pixel.rubiconproject.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://settings.luckyorange.net/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://ssl.google-analytics.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://static.doubleclick.net/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://static.hotjar.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://static.media.net/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://tags.crwdcntrl.net/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://tlx.3lift.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://tr.outbrain.com/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://upload.luckyorange.net/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://v.clarity.ms/” was blocked because content blocking is enabled. ABTest.html
+	resource at “https://w1.luckyorange.com/” was blocked because content blocking is enabled. ABTest.html
+
+*/
+
 const data = {
 	"Ads": {
 		"Google Ads": ["https://pagead2.googlesyndication.com",
@@ -52,20 +106,18 @@ const data = {
 			"https://swasc.homedepot.ca",
 			"https://smetrics.cbc.ca",
 			"https://smetrics.costco.ca",
-			"https://smetrics.globalnews.ca",
-		],
+			"https://smetrics.globalnews.ca"],
 		"Dataunlocker": [
 			"https://7mvmjg.www.emanualonline.com",
-			"https://tutbc1.www.tapmyback.com"
-		],
+			"https://tutbc1.www.tapmyback.com"],
 		"Acton": [
 			"https://info.augustahealth.org",
-			"https://marketing.tourismpg.com"
-		]
+			"https://marketing.tourismpg.com"]
 	},
 	"Social Trackers": {
 		"Facebook": ["https://pixel.facebook.com",
 			"https://ads.facebook.com",
+			"https://connect.facebook.net/en_US/fbevents.js",
 			"https://an.facebook.com"],
 		"Twitter": ["https://ads-api.twitter.com",
 			"https://advertising.twitter.com"],
@@ -89,6 +141,10 @@ const data = {
 	},
 	"Miscellaneous": {
 		"Miscellaneous": [
+			"https://www.google.com",
+			"https://imasdk.googleapis.com",
+			"https://fonts.googleapis.com",
+			"https://csi.gstatic.com",
 			"https://www.googletagmanager.com",
 			"https://ads.scorecardresearch.com",
 			"https://gumgum.com",
@@ -100,9 +156,9 @@ const data = {
 			"https://ads.pubmatic.com",
 			"https://sst.teamsimmer.com/gtm.js?id=GTM-M5WNG39",
 			"https://sgtm.simoahava.com/gtm.js?id=GTM-PZ7GMV9",
-			"https://gtm.bswhealth.com",
+			"https://gtm.bswhealth.com"
 		]
-	},
+	}
 };
 
 // Function to check an url and set red/green result
