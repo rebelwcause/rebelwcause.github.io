@@ -664,6 +664,20 @@
 
 		CSS Site Injection
 			rebelwcause.github.io##body { background-color: #FFEEEE !important; }
+
+		Builtin Wildcard Pattern Rules
+			"rebelwcause.github.io": ["_test/spy7"]
+			"rebelwcause.": ["/spy8"]
+			"rebelwcause.github": ["/spy9"]
+
+		Builtin Type Pattern Rules
+			"rebelwcause.github.io/ab_test/spy1": {"image": true, "script": true}
+			"rebelwcause.github.io/ab_test/spy2": {"image": false, "script": false}
+			"rebelwcause.github.io/ab_test/spy3": {"image": true, "script": true, "tp": true}
+			"rebelwcause.github.io/ab_test/spy4": {"image": true, "script": true, "tp": false}
+			"rebelwcause.github.io/ab_test/spy5": {"image": false, "script": false, "tp": true}
+			"rebelwcause.github.io/ab_test/spy6": {"image": false, "script": false, "tp": false}
+			"cdn.search.brave.com/serp/v2/_app/immutable/assets/": {"stylesheet": true, "font": true, "tp": true}
 		</pre>
 	</body>
 </html>
