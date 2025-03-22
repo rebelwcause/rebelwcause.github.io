@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
 	(async() => {
-		await new Promise(r => setTimeout(r, 2000));
 		console.log("running fpCollect.generateFingerprint");
 		const fingerprint = await fpCollect.generateFingerprint();
 		const rowsFingerprint = [];
