@@ -27,6 +27,17 @@ function check_spoofing(theobject, theprop)
 	return false;
 }
 
+function stringToHash(string) {
+	let hash = 0;
+	if (string.length == 0) return hash;
+	for (i = 0; i < string.length; i++) {
+		char = string.charCodeAt(i);
+		hash = ((hash << 5) - hash) + char;
+		hash = hash & hash;
+	}
+	return hash;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 	(async() => {
 		console.log("running fpCollect.generateFingerprint");
@@ -41,7 +52,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		rowsFingerprint.push('<tr><th>Attribute</th><th>Value</th><th>Comment</th><tr/>');
 		Object.keys(fingerprint).forEach(function(key) {
 			if (key === 'canvas')
+			{
 				rowsFingerprint.push('<tr><td>' + key + '</td><td><img src="' + fingerprint[key].image + '"></td><td></td><tr/>');
+				rowsFingerprint.push('<tr><td>' + key + ' data hash </td><td>' + stringToHash(fingerprint[key].image) + '</td><td></td><tr/>');
+			}
 			else if (key === 'navigatorPrototype')
 			{
 				let arrayv = fingerprint[key];
@@ -66,5 +80,17 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 		document.getElementById('fp').innerHTML = rowsFingerprint.join('');
 		console.log("Done fpCollect.generateFingerprint");
+
+
+		const fpPromise = FingerprintJS.load();
+		fpPromise.then(fp => fp.get()).then(result => {
+			const visitorId = result.visitorId;
+			console.log("fingerprintjs: ", visitorId);
+
+			let rjson = JSON.stringify(result.components, null, 2);
+
+			document.getElementById('fpInfo').innerHTML += "<br>fingerprintjs Fingerprint: " + visitorId + "<br>" + rjson;
+		});
+
 	})();
 });
