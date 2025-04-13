@@ -1,30 +1,18 @@
 /* jshint esversion: 8 */
-function check_spoofing(theobject, theprop)
+// uncomment for jshint.com
+//var Navigator, Screen, fpCollect, FingerprintJS;
+
+
+function is_spoofed(ptype, prop)
 {
-	// simple fcn to check for spoofing...
-	if (!Object.getOwnPropertyDescriptor(theobject, theprop))
-		return false; // not spoofed
-
-	try {
-		let gm = Object.getOwnPropertyDescriptor(theobject, theprop).get();
-		if (gm.toString())
-		{
-			console.log("check_spoofing get spoof ", gm.toString());
-			return true;
-		}
-	}
-	catch (err)
+	let result = check_single_proto(Navigator, prop);
+	result = Object.values(result)[0];
+	if (result.lieTypes && (result.lieTypes.length > 0))
 	{
-		// No get but could be value?
-		console.log("check_spoofing No get but could be value?");
+		let info = JSON.stringify(result.lieTypes, null, 2);
+		return {val: true, reason: info};
 	}
-	if (Object.getOwnPropertyDescriptor(theobject, theprop).value)
-	{
-		console.log("check_spoofing value spoof");
-		return true;
-	}
-
-	return false;
+	return {val: false, reason: "???"};
 }
 
 function stringToHash(string) {
@@ -67,8 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			{
 				if (checksp.includes(key))
 				{
-					let psp = check_spoofing(navigator, key);
-					let comment = psp ? "Spoofed?" : "OK";
+					let result = is_spoofed(navigator, key);
+					let comment = result.val ? "Spoofed? " + result.reason : "OK";
 					rowsFingerprint.push('<tr style="outline: thin solid #dddddd"><td>' + key + '</td><td>' + JSON.stringify(fingerprint[key], null, 1) +
 						'</td><td>' + comment + '</td></tr>');
 				}
@@ -90,6 +78,70 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			document.getElementById('fpInfo').innerHTML += "<br>fingerprintjs Fingerprint: " + visitorId + "<br>" + rjson;
 		});
+
+		// TODO
+		// Multiple proto tests
+		let objects = [AnalyserNode, AudioBuffer, BaseAudioContext, CanvasRenderingContext2D, HTMLCanvasElement,
+			HTMLElement, Navigator, Screen, WebGLRenderingContext, WebGL2RenderingContext, Window];
+
+		let results = check_many_protos(objects);
+		let liedapis = 0;
+		let liecount = 0;
+		for (let item in results.props)
+		{
+			let value = results.props[item];
+			if (undefined !== value.lieTypes)
+			{
+				liedapis++;
+				liecount += value.lieTypes.length;
+			}
+		}
+		for (let item in results.props)
+		{
+			let value = results.props[item];
+			if (undefined == value.lieTypes)
+				delete results.props[item];
+		}
+
+		let iel = document.getElementById("tamperInfo");
+		iel.innerText += "Total Lies: " + liecount;
+		iel.innerText += ", Total Lying API fcns: " + liedapis;
+		iel.innerText += ", Total Checks: " + results.propsSearched.length + "\n";
+		//iel.innerText += JSON.stringify(results.props, replacer, 2);
+
+		let text = ""
+		for (let item in results.props)
+		{
+			let value = results.props[item];
+			text += "\n" + item + "\n";
+			if (undefined !== value.lieTypes)
+				text += "\tlieTypes: " + JSON.stringify(value.lieTypes) + "\n";
+			if (undefined !== value.FunctionInfo)
+			{
+				if (typeof value.FunctionInfo === 'object')
+				{
+					text += "\tFunctionInfo: " + "\n";
+					for (let val in value.FunctionInfo)
+					{
+						text += "\t\t" + val + ": " + JSON.stringify(value.FunctionInfo[val], replacer) + "\n";
+					}
+				}
+				else
+				{
+					console.log("typeof value.FunctionInfo", typeof value.FunctionInfo);
+					text += "\tFunctionInfo: " + JSON.stringify(value.FunctionInfo, replacer, 2) + "\n";
+				}
+			}
+			if (undefined !== value.PropertyDescriptors)
+			{
+				text += "\tPropertyDescriptors: " + "\n";
+				for (let val in value.PropertyDescriptors)
+				{
+					text += "\t\t" + val + ": " + JSON.stringify(value.PropertyDescriptors[val]) + "\n";
+				}
+			}
+		}
+		iel.innerText += text;
 
 	})();
 });
