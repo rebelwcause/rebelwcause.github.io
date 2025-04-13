@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				}
 				else
 				{
-					console.log("typeof value.FunctionInfo", typeof value.FunctionInfo);
+					//console.log("typeof value.FunctionInfo", typeof value.FunctionInfo);
 					text += "\tFunctionInfo: " + JSON.stringify(value.FunctionInfo, replacer, 2) + "\n";
 				}
 			}
