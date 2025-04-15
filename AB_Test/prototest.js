@@ -77,7 +77,7 @@ const getToStringLie = (apiFunction, name) => {
 	'function get name() { [native code] }'
 	'function get name() {\n    [native code]\n}'
 	'function () { [native code] }'
-	`function () {\n    [native code]\n}`
+	'function () {\n    [native code]\n}'
 	*/
 	let ToString, ToStringToString, apiFunctionToString, apiFunctionToStringToString;
 	try {
@@ -196,7 +196,9 @@ const getChainCycleLie = ({ apiFunction, method = 'setPrototypeOf' }) => {
 			return true; // failed Error
 		}
 	} finally {
-		Object.setPrototypeOf(apiFunction, nativeProto); // restore
+		try { // can also error - just ignore
+			Object.setPrototypeOf(apiFunction, nativeProto); // restore
+		} catch (error) {}
 	}
 };
 
@@ -209,25 +211,25 @@ const getLies = ({ apiFunction, proto, obj = null, lieProps }) => {
 
 	let lies = {
 		// custom lie string names
-		//[`failed illegal error`]: obj ? getIllegalTypeErrorLie(obj, name) : false,
-		[`failed undefined properties`]: obj ? getUndefinedValueLie(obj, name) : false,
-		[`failed call interface error`]: getCallInterfaceTypeErrorLie(apiFunction, proto),
-		[`failed apply interface error`]: getApplyInterfaceTypeErrorLie(apiFunction, proto),
-		[`failed new instance error`]: getNewInstanceTypeErrorLie(apiFunction),
-		//[`failed class extends error`]: getClassExtendsTypeErrorLie(apiFunction),
-		//[`failed null conversion error`]: getNullConversionTypeErrorLie(apiFunction),
-		[`failed toString`]: getToStringLie(apiFunction, name),
-		[`failed 'prototype' in function`]: getPrototypeInFunctionLie(apiFunction),
-		[`failed descriptor`]: getDescriptorLie(apiFunction),
-		[`failed own property`]: getOwnPropertyLie(apiFunction),
-		[`failed descriptor keys`]: getDescriptorKeysLie(apiFunction),
-		[`failed own property names`]: getOwnPropertyNamesLie(apiFunction),
-		[`failed own keys names`]: getOwnKeysLie(apiFunction),
-		//[`failed object toString error`]: getNewObjectToStringTypeErrorLie(apiFunction),
+		//["failed illegal error"]: obj ? getIllegalTypeErrorLie(obj, name) : false,
+		["failed undefined properties"]: obj ? getUndefinedValueLie(obj, name) : false,
+		["failed call interface error"]: getCallInterfaceTypeErrorLie(apiFunction, proto),
+		["failed apply interface error"]: getApplyInterfaceTypeErrorLie(apiFunction, proto),
+		["failed new instance error"]: getNewInstanceTypeErrorLie(apiFunction),
+		//["failed class extends error"]: getClassExtendsTypeErrorLie(apiFunction),
+		//["failed null conversion error"]: getNullConversionTypeErrorLie(apiFunction),
+		["failed toString"]: getToStringLie(apiFunction, name),
+		["failed 'prototype' in function"]: getPrototypeInFunctionLie(apiFunction),
+		["failed descriptor"]: getDescriptorLie(apiFunction),
+		["failed own property"]: getOwnPropertyLie(apiFunction),
+		["failed descriptor keys"]: getDescriptorKeysLie(apiFunction),
+		["failed own property names"]: getOwnPropertyNamesLie(apiFunction),
+		["failed own keys names"]: getOwnKeysLie(apiFunction),
+		//["failed object toString error"]: getNewObjectToStringTypeErrorLie(apiFunction),
 		//// Proxy Detection
-		//[`failed at incompatible proxy error`]: getIncompatibleProxyTypeErrorLie(apiFunction),
-		//[`failed at toString incompatible proxy error`]: getToStringIncompatibleProxyTypeErrorLie(apiFunction),
-		[`failed at too much recursion error`]: getChainCycleLie({ apiFunction })
+		//["failed at incompatible proxy error"]: getIncompatibleProxyTypeErrorLie(apiFunction),
+		//["failed at toString incompatible proxy error"]: getToStringIncompatibleProxyTypeErrorLie(apiFunction),
+		["failed at too much recursion error"]: getChainCycleLie({ apiFunction })
 	};
 	//// conditionally use advanced detection
 	//const detectProxies = (
@@ -238,13 +240,13 @@ const getLies = ({ apiFunction, proto, obj = null, lieProps }) => {
 		////lies = {
 			////...lies,
 			////// Advanced Proxy Detection
-			////[`failed at too much recursion __proto__ error`]: getChainCycleLie({ apiFunction, method: '__proto__' }),
-			////[`failed at chain cycle error`]: getTooMuchRecursionLie({ apiFunction }),
-			////[`failed at chain cycle __proto__ error`]: getTooMuchRecursionLie({ apiFunction, method: '__proto__' }),
-			////[`failed at reflect set proto`]: getReflectSetProtoLie({ apiFunction, randomId }),
-			////[`failed at reflect set proto proxy`]: getReflectSetProtoProxyLie({ apiFunction, randomId }),
-			////[`failed at instanceof check error`]: getInstanceofCheckLie(apiFunction),
-			////[`failed at define properties`]: getDefinePropertiesLie(apiFunction)
+			////["failed at too much recursion __proto__ error"]: getChainCycleLie({ apiFunction, method: '__proto__' }),
+			////["failed at chain cycle error"]: getTooMuchRecursionLie({ apiFunction }),
+			////["failed at chain cycle __proto__ error"]: getTooMuchRecursionLie({ apiFunction, method: '__proto__' }),
+			////["failed at reflect set proto"]: getReflectSetProtoLie({ apiFunction, randomId }),
+			////["failed at reflect set proto proxy"]: getReflectSetProtoProxyLie({ apiFunction, randomId }),
+			////["failed at instanceof check error"]: getInstanceofCheckLie(apiFunction),
+			////["failed at define properties"]: getDefinePropertiesLie(apiFunction)
 		////}
 	////}
 	const lieTypes = Object.keys(lies).filter(key => !!lies[key]);
@@ -254,79 +256,87 @@ const getLies = ({ apiFunction, proto, obj = null, lieProps }) => {
 function check_proto(proto, name, props, apiName, obj)
 {
 	try {
-		const apiFunction = proto[name]; // may trigger TypeError
-		const stype = typeof apiFunction;
-		if (stype == 'function')
-		{
-			let res = getLies({ apiFunction: proto[name], proto, lieProps: props });
-			// returns { lied: lieTypes.length, lieTypes }
-			if (res.lied) {
-				return (props[apiName] = {lieTypes: res.lieTypes,
-					FunctionInfo: Object.getOwnPropertyDescriptor(proto, name),
-					PropertyDescriptors: Object.getOwnPropertyDescriptors(proto[name])});
-			}
-			return (props[apiName] = {lieTypes: undefined,
-				FunctionInfo: Object.getOwnPropertyDescriptor(proto, name),
-				PropertyDescriptors: Object.getOwnPropertyDescriptors(proto[name])});
-		}
-
-		// since there is no TypeError and the typeof is not a function,
-		// search getter function and handle invalid values and ingnore name, length, and constants
-		if ( name != 'name' && name != 'length' && name[0] !== name[0].toUpperCase())
-		{
-			// search getter function
-			const getterFunction = Object.getOwnPropertyDescriptor(proto, name).get;
-			if (getterFunction)
+		try {
+			const apiFunction = proto[name]; // may trigger TypeError
+			const stype = typeof apiFunction;
+			if (stype == 'function')
 			{
-				let res = getLies({ apiFunction: getterFunction, proto, obj, }); // send the obj for special tests
+				let res = getLies({ apiFunction: proto[name], proto, lieProps: props });
+				// returns { lied: lieTypes.length, lieTypes }
 				if (res.lied) {
 					return (props[apiName] = {lieTypes: res.lieTypes,
 						FunctionInfo: Object.getOwnPropertyDescriptor(proto, name),
-						PropertyDescriptors: Object.getOwnPropertyDescriptors(getterFunction)});
+						PropertyDescriptors: Object.getOwnPropertyDescriptors(proto[name])});
 				}
+				return (props[apiName] = {lieTypes: undefined,
+					FunctionInfo: Object.getOwnPropertyDescriptor(proto, name),
+					PropertyDescriptors: Object.getOwnPropertyDescriptors(proto[name])});
 			}
 
-			const lie = [`failed descriptor.value undefined`];
-			try {
-				let pfcn = Object.getOwnPropertyDescriptor(proto, name);
-				let pDescriptors;
-				if (pfcn)
-					pDescriptors = Object.getOwnPropertyDescriptors(proto[name]);
-				return (props[apiName] = {lieTypes: lie,
-					FunctionInfo: pfcn,
-					PropertyDescriptors: pDescriptors});
-			}
-			catch (erra)
+			// since there is no TypeError and the typeof is not a function,
+			// search getter function and handle invalid values and ingnore name, length, and constants
+			if ( name != 'name' && name != 'length' && name[0] !== name[0].toUpperCase())
 			{
-				console.log("erra", erra.message);
+				// search getter function
+				const getterFunction = Object.getOwnPropertyDescriptor(proto, name).get;
+				if (getterFunction)
+				{
+					let res = getLies({ apiFunction: getterFunction, proto, obj, }); // send the obj for special tests
+					if (res.lied) {
+						return (props[apiName] = {lieTypes: res.lieTypes,
+							FunctionInfo: Object.getOwnPropertyDescriptor(proto, name),
+							PropertyDescriptors: Object.getOwnPropertyDescriptors(getterFunction)});
+					}
+				}
+
+				const lie = ["failed descriptor.value undefined"];
+				try {
+					let pfcn = Object.getOwnPropertyDescriptor(proto, name);
+					let pDescriptors;
+					if (pfcn)
+						pDescriptors = Object.getOwnPropertyDescriptors(proto[name]);
+					return (props[apiName] = {lieTypes: lie,
+						FunctionInfo: pfcn,
+						PropertyDescriptors: pDescriptors});
+				}
+				catch (erra)
+				{
+					console.log("erra", erra.message);
+				}
 			}
+			else
+			{
+				// undefined, number...
+				//console.log("UNHANDLED", stype, name);
+			}
+		}
+		catch (err2)
+		{
+			// TypeError: 'get appName' called on an object that does not implement interface Navigator.
+			//console.log("ERROR", err2.message);
+		}
+		// else search getter function
+		const getterFunction = Object.getOwnPropertyDescriptor(proto, name).get;
+		if (getterFunction)
+		{
+			let res = getLies({ apiFunction: getterFunction, proto, obj, }); // send the obj for special tests
+			if (res.lied) {
+				return (props[apiName] = {lieTypes: res.lieTypes, FunctionInfo: getterFunction,
+					PropertyDescriptors: Object.getOwnPropertyDescriptors(getterFunction)});
+			}
+			return (props[apiName] = {lieTypes: undefined, FunctionInfo: getterFunction,
+					PropertyDescriptors: Object.getOwnPropertyDescriptors(getterFunction)});
 		}
 		else
 		{
-			// undefined, number...
-			//console.log("UNHANDLED", stype, name);
+			//console.log("NO getterFunction", name);
 		}
 	}
-	catch (err2)
+	catch (error)
 	{
-		// TypeError: 'get appName' called on an object that does not implement interface Navigator.
-		//console.log("ERROR", err2.message);
-	}
-	// else search getter function
-	const getterFunction = Object.getOwnPropertyDescriptor(proto, name).get;
-	if (getterFunction)
-	{
-		let res = getLies({ apiFunction: getterFunction, proto, obj, }); // send the obj for special tests
-		if (res.lied) {
-			return (props[apiName] = {lieTypes: res.lieTypes, FunctionInfo: getterFunction,
-				PropertyDescriptors: Object.getOwnPropertyDescriptors(getterFunction)});
-		}
-		return (props[apiName] = {lieTypes: undefined, FunctionInfo: getterFunction,
-				PropertyDescriptors: Object.getOwnPropertyDescriptors(getterFunction)});
-	}
-	else
-	{
-		//console.log("NO getterFunction", name);
+		const lie = ["failed prototype test execution"];
+		return (props[apiName] = {lieTypes: lie, FunctionInfo: undefined,
+			PropertyDescriptors: undefined});
 	}
 }
 
@@ -368,7 +378,6 @@ function check_many_protos(objects)
 				}.${name}`;
 			//console.log("apiName", apiName);
 			propsSearched.push(apiName);
-
 			check_proto(proto, name, props, apiName, obj);
 		}
 	}
