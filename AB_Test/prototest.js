@@ -21,7 +21,9 @@ function replacer(key, value) {
 const getEngine = () => {
 	const mathPI = 3.141592653589793;
 	const compute = n => mathPI ** -100 == +`1.9275814160560${n}e-50`;
-	return { isChrome: compute(204), isFirefox: compute(185), isSafari: compute(206) };
+	// This is DEFINITELY WRONG for firefox esr 128.9.0esr !!! Were firefox and Safari switched??
+	//return { isChrome: compute(204), isFirefox: compute(185), isSafari: compute(206) };
+	return { isChrome: compute(204), isFirefox: compute(206), isSafari: compute(185) };
 };
 
 // Lie Tests
@@ -161,6 +163,28 @@ const getOwnKeysLie = apiFunction => {
 	return hasInvalidKeys;
 };
 
+/* Proxy Detection */
+// arguments or caller should not throw 'incompatible Proxy' TypeError
+const tryIncompatibleProxy = fn => {
+	const { isFirefox } = getEngine();
+	try {
+		fn();
+		return true; // failed to throw
+	} catch (error) {
+		return (
+			error.constructor.name != 'TypeError' ||
+			(isFirefox && /incompatible\sProxy/.test(error.message))
+		);
+	}
+};
+
+const getIncompatibleProxyTypeErrorLie = apiFunction => {
+	return (
+		tryIncompatibleProxy(() => apiFunction.arguments) ||
+		tryIncompatibleProxy(() => apiFunction.caller)
+	);
+};
+
 // setPrototypeOf error tests
 const spawnError = (apiFunction, method) => {
 	if (method == 'setPrototypeOf') {
@@ -196,9 +220,9 @@ const getChainCycleLie = ({ apiFunction, method = 'setPrototypeOf' }) => {
 			return true; // failed Error
 		}
 	} finally {
-		try { // can also error - just ignore
+		//try { // can also error - just ignore
 			Object.setPrototypeOf(apiFunction, nativeProto); // restore
-		} catch (error) {}
+		//} catch (error) {}
 	}
 };
 
@@ -227,7 +251,7 @@ const getLies = ({ apiFunction, proto, obj = null, lieProps }) => {
 		["failed own keys names"]: getOwnKeysLie(apiFunction),
 		//["failed object toString error"]: getNewObjectToStringTypeErrorLie(apiFunction),
 		//// Proxy Detection
-		//["failed at incompatible proxy error"]: getIncompatibleProxyTypeErrorLie(apiFunction),
+		["failed at incompatible proxy error"]: getIncompatibleProxyTypeErrorLie(apiFunction),
 		//["failed at toString incompatible proxy error"]: getToStringIncompatibleProxyTypeErrorLie(apiFunction),
 		["failed at too much recursion error"]: getChainCycleLie({ apiFunction })
 	};
