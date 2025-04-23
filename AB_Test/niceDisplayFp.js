@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		// TODO
 		// Multiple proto tests
 		let objects = [AnalyserNode, AudioBuffer, BaseAudioContext, CanvasRenderingContext2D, HTMLCanvasElement,
-			HTMLElement, Navigator, Screen, WebGLRenderingContext, WebGL2RenderingContext, Window];
+			HTMLElement, Navigator, Screen, WebGLRenderingContext, WebGL2RenderingContext, Window, MediaDevices, Math];
 
 		let results = check_many_protos(objects);
 		let liedapis = 0;

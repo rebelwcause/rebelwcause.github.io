@@ -89,7 +89,6 @@ const getToStringLie = (apiFunction, name) => {
 		ToStringToString = Function.prototype.toString.call(apiFunction.toString);
 	} catch (e) { }
 
-
 	try { // only needed on moms - Proxy - getChannelData etc...
 		apiFunctionToString = (ToString ? ToString : apiFunction.toString());
 	} catch (e)
@@ -109,10 +108,10 @@ const getToStringLie = (apiFunction, name) => {
 		[`function () {${'\n'}    [native code]${'\n'}}`]: true
 	});
 
-	return (
-		!trust(name)[apiFunctionToString] ||
-		!trust('toString')[apiFunctionToStringToString]
-	);
+	let rval = !trust(name)[apiFunctionToString];
+	rval = ( !trust(name)[apiFunctionToString] || !trust('toString')[apiFunctionToStringToString] );
+
+	return rval;
 };
 
 // "prototype" in function should not exist
