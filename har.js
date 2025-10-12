@@ -484,7 +484,7 @@ function add_comment(thobj, tritem, ccomment)
 
 		let a = document.createElement('a');
 		//a.setAttribute('href', "https://better.fyi/trackers/" + thobj.tdomain);
-		a.setAttribute('href', "https://slayterdev.github.io/tracker-radar-wiki/domains/" + thobj.tdomain + ".html");
+		a.setAttribute('href', "https://duckduckgo.github.io/tracker-radar-wiki/domains/" + thobj.tdomain + ".html");
 		a.innerHTML = " Click for information. ";
 		a.setAttribute('target', "_blank");
 		tspan.appendChild(a);
@@ -508,7 +508,7 @@ function add_comment(thobj, tritem, ccomment)
 			{
 				let ah = document.createElement('a');
 				//ah.setAttribute('href', "https://better.fyi/trackers/" + thobj.tdomain);
-				ah.setAttribute('href', "https://slayterdev.github.io/tracker-radar-wiki/domains/" + thobj.tdomain + ".html");
+				ah.setAttribute('href', "https://duckduckgo.github.io/tracker-radar-wiki/domains/" + thobj.tdomain + ".html");
 				ah.setAttribute('target', "_blank");
 				ah.innerHTML = " Click for information. ";
 				tspan.appendChild(ah);
@@ -1477,7 +1477,7 @@ function populate_cookies_table()
 
 				let a = document.createElement('a');
 				//a.setAttribute('href', "https://better.fyi/trackers/" + trackdomain);
-				a.setAttribute('href', "https://slayterdev.github.io/tracker-radar-wiki/domains/" + domain + ".html");
+				a.setAttribute('href', "https://duckduckgo.github.io/tracker-radar-wiki/domains/" + domain + ".html");
 				a.innerHTML = " Click for information. ";
 				a.setAttribute('target', "_blank");
 				tspan.appendChild(a);
