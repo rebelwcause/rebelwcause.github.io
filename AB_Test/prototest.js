@@ -94,7 +94,7 @@ const getToStringLie = (apiFunction, name) => {
 	} catch (e)
 	{
 		// happens on moms only with Proxy - getChannelData etc...
-		console.log("getToStringLie", e.message, apiFunction, name, ToString, ToStringToString);
+		//console.log("getToStringLie", e.message, apiFunction, name, ToString, ToStringToString);
 	}
 
 	apiFunctionToStringToString = ( ToStringToString ? ToStringToString : apiFunction.toString.toString() );
