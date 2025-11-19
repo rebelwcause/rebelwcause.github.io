@@ -12,8 +12,9 @@
 			background-color: #FFFFFF;
 			position: fixed;
 			top: 0;
-			padding-top: 6px;
-			width: 99%;
+			padding-top: 4px;
+			width: -moz-available;
+			z-index: 2;
 		}
 
 		.info {
@@ -167,9 +168,10 @@
 			<div class="info">
 				<div class="tab">
 					<span style="float: left;">
-						<img style="padding: 2px 6px 0px 6px" src="i24.png" alt="Icon">
+						<img style="padding: 2px 6px 0px 6px" src="i24.png" alt="Icon" title="F1 for Help!">
 					</span>
-					<span style="float: left; font-size: 24px;">Tims HAR Viewer</span>
+					<span style="float: left; font-size: 24px;" title="F1 for Help!">Tims HAR Viewer</span>
+					<span style="font-size: 14px; padding-left:10px;">(Optimized for Firefox HAR files)</span>
 
 					<input class="browser-style" style="margin-left: 10px; margin-top: 10px;" type="checkbox" id="hide-blocked" title="Hide Blocked Sites/Domains">
 					<label for="hide-blocked" title="Hide Blocked Sites/Domains">HBS</label>
@@ -355,12 +357,8 @@ include a query string and/or cookies.</p>
 		<script src="./common/graph.js"></script>
 		<script src="custom.js"></script>
 
-		<script src="./common/cname_trackers.js"></script>
-		<script src="./common/services.js"></script>
 		<script src="./common/trackers.js"></script>
 
-		<script src="./common/ddg_trackers.js"></script>
-		<script src="./common/trackers_ddg.js"></script>
 
 		<script src="./common/filtable.js"></script>
 		<script src="./common/sortable.js"></script>

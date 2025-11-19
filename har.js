@@ -6,7 +6,7 @@
 /* jshint esversion: 6 */
 /* jshint sub:true */
 // Just to shut jsHint up (https://jshint.com/)
-//let g_trackers, cname_trackers, g_ddgtrackers, Graph, Progress, refresh_sortables, do_sortable, do_filter;
+//let g_trackers, cname_trackers, Graph, Progress, refresh_sortables, do_sortable, do_filter;
 
 /*
 
@@ -148,7 +148,6 @@ let g_trequests = 0; // number of tracking requests
 let g_hide_trackers = false;
 
 let g_cinfo = {};
-//let g_csyncers = {};
 
 let g_lowmem = false; // set to true for moms box so just graphing...
 
@@ -214,19 +213,23 @@ let g_types = {
 ////////////////////////////////////////////////////////////////////
 function getbasedomain(hostname)
 {
-	// websitename.com --> websitename.com
-	// www.websitename.com --> websitename.com
-	// www.sdc.websitename.com --> websitename.com
-	// www.sdc.abc.websitename.com --> websitename.com
-	// www.abc.co.uk --> abc.co.uk
-	// 0c3879ab4...b350ab8.safeframe.googlesyndication.com -> googlesyndication.com
-	// googleads.g.doubleclick.net -> doubleclick.net
-	// about:addons --> about:addons
-	// -->
-	// file:///home/bossman/Programs/Web/local_test file:///home/bossman/Programs/Web/local_test
-	// TODO: Fails for id.hadron.ad.gt -> hadron.ad.gt and 44.228.85.26 -> 228.85.26
-	// Does not always work - assuming length of 2 for second to last may fail!!
-
+	/*
+	fonts.gstatic.com  -->>  gstatic.com
+	fundingchoicesmessages.google.com  -->>  google.com
+	launchpad-wrapper.privacymanager.io  -->>  privacymanager.io
+	connectid.analytics.yahoo.com  -->>  yahoo.com
+	3f8e20ce72fcff391c8778e057cfc82b.safeframe.googlesyndication.com  -->>  googlesyndication.com
+	sync.rbstsystems.live  -->>  rbstsystems.live
+	tracookiepixel.xyz  -->>  tracookiepixel.xyz
+	ws.rqtrk.eu  -->>  rqtrk.eu
+	cm.g.doubleclick.net  -->>  doubleclick.net
+	cmp.dmgmediaprivacy.co.uk  -->>  dmgmediaprivacy.co.uk
+	idsync.dailymail.co.uk  -->>  dailymail.co.uk
+	ssp.wknd.ai  -->>  wknd.ai
+	app.link  -->>  app.link
+	ep1.adtrafficquality.google  -->>  adtrafficquality.google
+	static.cdn.admatic.de  -->> admatic.de
+	*/
 	let domain = hostname;
 	if (hostname.startsWith("file:"))
 		return domain;
@@ -235,15 +238,33 @@ function getbasedomain(hostname)
 	let arrLen = splitArr.length;
 	if (arrLen > 2)
 	{
-		domain = splitArr[arrLen - 2] + '.' + splitArr[arrLen - 1];
-		// check to see if it's using a Country Code Top Level Domain (ccTLD) (i.e. ".co.uk")
-		if ((arrLen > 3) && (splitArr[arrLen - 2].length == 2) && (splitArr[arrLen - 1].length == 2))
+		domain = splitArr[arrLen - 2] + "." + splitArr[arrLen - 1];
+		if ("ad.gt" !== domain) // special case - host: id.hadron.ad.gt - Audigent cookieless ID!!
 		{
-			domain = splitArr[arrLen - 3] + '.' + domain;
-			if (!domain.endsWith(".co.uk"))
-				console.log(hostname, domain);
+			if (arrLen > 3)
+			{
+				if (splitArr[arrLen - 1].length == 2) // ends with .uk or something
+				{
+					if (splitArr[arrLen - 2].length == 2) // ends with .co.uk or something
+					{
+						domain = splitArr[arrLen - 3] + "." + domain;
+					}
+					else if (splitArr[arrLen - 2].length == 3) // ends with .com.au or something
+					{
+						// Only handle main ones here???
+						if (("com" === splitArr[arrLen - 2]) || ("net" === splitArr[arrLen - 2]) ||
+							("edu" === splitArr[arrLen - 2]) || ("org" === splitArr[arrLen - 2]) ||
+							("gov" === splitArr[arrLen - 2]) || ("mil" === splitArr[arrLen - 2]))
+						{
+							domain = splitArr[arrLen - 3] + "." + domain;
+						}
+					}
+				}
+			}
 		}
 	}
+	//if (!domain.endsWith(".com") && !domain.endsWith(".net"))
+	//	console.log("getbasedomain", hostname, domain);
 	return domain;
 }
 
@@ -782,44 +803,6 @@ function finalize_requests_table()
 }
 
 ////////////////////////////////////////////////////////////////////
-//function add_csyncer(hostname, rdhostname)
-//{
-	//let csyncer = g_csyncers[hostname];
-	//if (undefined === csyncer)
-	//{
-		//g_csyncers[hostname] = {count: 0, partners: {}};
-		//g_csyncers[hostname].partners[rdhostname] = {count: 1};
-	//}
-	//else
-	//{
-		//let partners = csyncer.partners;
-		//let found = partners[rdhostname];
-		//if (undefined === found)
-			//partners[rdhostname] = {count: 1};
-		//else
-			//found.count++;
-	//}
-	//g_csyncers[hostname].count++;
-
-	//csyncer = g_csyncers[rdhostname];
-	//if (undefined === csyncer)
-	//{
-		//g_csyncers[rdhostname] = {count: 0, partners: {}};
-		//g_csyncers[rdhostname].partners[hostname] = {count: 1};
-	//}
-	//else
-	//{
-		//let partners = csyncer.partners;
-		//let found = partners[hostname];
-		//if (undefined === found)
-			//partners[hostname] = {count: 1};
-		//else
-			//found.count++;
-	//}
-	//g_csyncers[rdhostname].count++;
-//}
-
-////////////////////////////////////////////////////////////////////
 function populate_requests_table(entries, mainsite, hide_blocked, hosts)
 {
 	//console.time("populate_requests_table");
@@ -1231,7 +1214,6 @@ function populate_requests_table(entries, mainsite, hide_blocked, hosts)
 			{
 				dcsync = true;
 				//console.log("We HAVE A PROBLEM GOOGLE REQUEST!", entry.hostname, rurl.hostname);
-				//add_csyncer(entry.hostname, rurl.hostname);
 
 				hosts[entry.hostname].dcsync++;
 				// Also add redirect as it is too!!
@@ -1242,7 +1224,6 @@ function populate_requests_table(entries, mainsite, hide_blocked, hosts)
 			{
 				dcsync = true;
 				//console.log("We HAVE A PROBLEM GOOGLE REDIRECT!", entry.hostname, rurl.hostname);
-				//add_csyncer(entry.hostname, rurl.hostname);
 
 				hosts[entry.hostname].dcsync++;
 				// Also add redirect as it is too!!
@@ -1266,7 +1247,6 @@ function populate_requests_table(entries, mainsite, hide_blocked, hosts)
 						{
 							dcsync = true;
 							//console.log("We HAVE A PROBLEM HOUSTON!", cname, value, entry.hostname, rurl.hostname);
-							//add_csyncer(entry.hostname, rurl.hostname);
 
 							hosts[entry.hostname].dcsync++;
 							// Also add redirect as it is too!!
@@ -1332,7 +1312,9 @@ function populate_requests_table(entries, mainsite, hide_blocked, hosts)
 			// check iff redirect is a tracker, possibly cname?
 			let tracker = false;
 			let trackdomain = refbd;
-			let strtracker = g_trackers[trackdomain];
+			let strtracker = g_trackers[rurl.hostname];
+			if (undefined == strtracker)
+				strtracker = g_trackers[trackdomain];
 			if (undefined !== strtracker)
 				tracker = true;
 			else
@@ -1811,7 +1793,9 @@ function graph_items(theobj, mainsite, hide_blocked, maxcount)
 function check_tracker(entry, hostname)
 {
 	let trackdomain = getbasedomain(hostname);
-	let strtracker = g_trackers[trackdomain];
+	let strtracker = g_trackers[hostname];
+	if (undefined == strtracker)
+		strtracker = g_trackers[trackdomain];
 	if (undefined !== strtracker)
 	{
 		entry.tracker = strtracker;
@@ -1819,26 +1803,15 @@ function check_tracker(entry, hostname)
 	}
 	else
 	{
-		// Test using additional DDG tracker list - this should not impact performance in any real way?
-		strtracker = g_ddgtrackers[trackdomain];
-		if (undefined !== strtracker)
+		let cntracker = cname_trackers[hostname];
+		if (undefined !== cntracker)
 		{
-			//console.log("DDG Tracker!", trackdomain, strtracker);
-			entry.tracker = "DDG " + strtracker;
-			entry.tdomain = trackdomain;
-		}
-		else
-		{
-			let cntracker = cname_trackers[hostname];
-			if (undefined !== cntracker)
+			entry.cntracker = cntracker;
+			trackdomain = getbasedomain(cntracker);
+			let strtracker = g_trackers[trackdomain];
+			if (undefined !== strtracker)
 			{
-				entry.cntracker = cntracker;
-				trackdomain = getbasedomain(cntracker);
-				let strtracker = g_trackers[trackdomain];
-				if (undefined !== strtracker)
-				{
-					entry.tdomain = trackdomain;
-				}
+				entry.tdomain = trackdomain;
 			}
 		}
 	}
@@ -1870,9 +1843,9 @@ function process_hars()
 		if (g_rawdata[ii].log.browser) // does not exist with downloaded har from pagexray.fouanalytics.com
 			browser = g_rawdata[ii].log.browser.name + " " + g_rawdata[ii].log.browser.version;
 
-		let title = "Unknown"
-		let DateTime = "2023-01-01T00:00:00.000Z"
-		let pt = {}
+		let title = "Unknown";
+		let DateTime = "2023-01-01T00:00:00.000Z";
+		let pt = {};
 		if (g_rawdata[ii].log.pages) // May not exist!
 		{
 			title = g_rawdata[ii].log.pages[0].title;
@@ -1913,8 +1886,39 @@ function process_hars()
 			hosts[hosturl.hostname].count++;
 
 			// NOTE: Not that easy to determine iff blocked!!
+			/*
+			Older ff say ver 120 ?
+			"response": {
+				"status": 0,
+				"statusText": "",
+				"httpVersion": "",
+				"headers": [],
+				"cookies": [],
+				"content": {},
+				"redirectURL": "",
+				"headersSize": 0,
+				"bodySize": -1
+			},
+			New ff (14x nightly with playwright)
+			"response": {
+				"status": -1,
+				"statusText": "",
+				"httpVersion": "HTTP/1.1",
+				"cookies": [],
+				"headers": [],
+				"content": {
+				"size": -1,
+				"mimeType": "x-unknown"
+			},
+			"headersSize": -1,
+			"bodySize": -1,
+			"redirectURL": "",
+			"_transferSize": -1,
+			"_failureText": "NS_ERROR_CONNECTION_REFUSED"
+			*/
 			let rheaders = entry.response;
-			if (0 == rheaders.status)
+			//if (0 == rheaders.status)
+			if ((0 == rheaders.status) || (-1 == rheaders.status))
 			{
 				if (-1 == rheaders.bodySize)
 					entry.blocked = true;
@@ -2126,7 +2130,6 @@ function process_hars()
 	g_graph.settext(gtext, "bold 20px Arial", "#000088", 2, 2);
 
 	//console.log(g_cinfo);
-	//console.log(g_csyncers);
 
 	g_Progress.show(false);
 
@@ -2136,7 +2139,6 @@ function process_hars()
 	g_alldomains = {};
 	g_domains = [];
 	g_cinfo = {};
-	//g_csyncers = {};
 
 	console.timeEnd("process_hars");
 }
@@ -2290,7 +2292,6 @@ function positionInitially(evt)
 				node.y = radius * Math.sin(angle);
 				node._x = node.x / dist;
 				node._y = node.y / dist;
-				//console.log("Remaining", node.id, angle, node.x, node.y);
 			}
 		}
 	}
@@ -2381,11 +2382,9 @@ function resizewindow(evt)
 	}
 
 	let graph = document.getElementById("graph");
-	//console.log(graph);
 	let ctx = document.getElementById("_ctx");
 
 	var rect = graph.getBoundingClientRect();
-	//console.log(rect);
 	if (rect.width) // will fail on initial load!
 		ctx.width = rect.width - 2;
 	else
@@ -2404,15 +2403,8 @@ function readFileAsText(file)
 {
 	return new Promise(function(resolve, reject) {
 		let fr = new FileReader();
-
-		fr.onload = function() {
-			resolve(fr.result);
-		};
-
-		fr.onerror = function() {
-			reject(fr);
-		};
-
+		fr.onload = function() { resolve(fr.result); };
+		fr.onerror = function() { reject(fr); };
 		fr.readAsText(file);
 	});
 }
@@ -2619,10 +2611,6 @@ function addRowHandlers()
 	for (let i = 0; i < rows.length; i++)
 	{
 		let currentRow = rows[i];
-		//let createClickHandler = function(row)
-		//{ return function() { populate_modal(row.harentry); }; };
-		//currentRow.onclick = createClickHandler(currentRow);
-
 		// For first cell of row...
 		let cell = currentRow.getElementsByTagName("td")[0];
 		cell.onclick = function(evt)
@@ -2739,7 +2727,6 @@ document.getElementById("file-input").addEventListener("change", function(evt) {
 		g_domains = [];
 
 		g_cinfo = {};
-		//g_csyncers = {};
 		g_trequests = 0;
 
 		g_hide_trackers = document.getElementById("hide-trackers").checked;
